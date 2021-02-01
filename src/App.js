@@ -1,21 +1,13 @@
 import React from "react"
-import { StyleSheet, View, Text, StatusBar } from "react-native"
+
+import Home from "~/components/Home"
 
 const App = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <View style={styles.container}>
-        <Text>hello</Text>
-      </View>
+      <Home />
     </>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-})
 
 export default App
