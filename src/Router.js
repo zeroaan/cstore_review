@@ -1,5 +1,5 @@
 import React from "react"
-import { BaseRouter, NavigationContainer } from "@react-navigation/native"
+import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
@@ -15,7 +15,7 @@ export default () => {
     <NavigationContainer>
       <Tabs.Navigator
         screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
+          tabBarIcon: ({ focused, color }) => {
             let iconName
             if (route.name === "홈") {
               iconName = focused ? "home" : "home"

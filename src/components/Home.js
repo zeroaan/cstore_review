@@ -1,11 +1,9 @@
 import React from "react"
-import { StyleSheet, View, Text, StatusBar } from "react-native"
-import Icon from "react-native-vector-icons/MaterialIcons"
+import { StyleSheet, View, Text } from "react-native"
 
-const App = () => {
+const Home = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
       <View style={styles.logoContainer}>
         <Text style={styles.logo}>편리</Text>
       </View>
@@ -32,4 +30,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default App
+export default Home
