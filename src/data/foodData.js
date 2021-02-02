@@ -52,7 +52,7 @@ export const FOODDATA = [
   {
     id: 5,
     name: "짜파게티",
-    price: "1,00",
+    price: "1,000",
     liked: 3,
     review: 17,
     star: 4.4,
