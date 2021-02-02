@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "white",
     marginBottom: 8,
+    paddingTop: 12,
   },
   title: {
     color: "rgb(0, 175, 175)",
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
   bestText: {
     paddingHorizontal: 16,
     paddingVertical: 12,
-    fontSize: 16,
+    fontSize: 18,
   },
   bestFood: {
     backgroundColor: "white",

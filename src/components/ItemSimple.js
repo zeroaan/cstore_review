@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
   },
   itemName: {
     textAlign: "center",
-    fontSize: 13,
+    fontSize: 15,
+    fontWeight: "bold",
   },
   itemDesc: {
     marginTop: 4,
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
     color: "rgb(254, 68, 80)",
   },
   itemPrice: {
-    fontSize: 13,
+    fontSize: 14,
   },
 })
 
