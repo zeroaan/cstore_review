@@ -4,8 +4,8 @@ import { StyleSheet, View, Text } from "react-native"
 const Home = () => {
   return (
     <>
-      <View style={styles.logoContainer}>
-        <Text style={styles.logo}>편리</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>편리</Text>
       </View>
       <View style={styles.container}>
         <Text>hello</Text>
@@ -18,13 +18,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 12,
   },
-  logoContainer: {
+  titleContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
   },
-  logo: {
+  title: {
     color: "rgb(0, 175, 175)",
     fontSize: 30,
     fontFamily: "DoHyeon",
