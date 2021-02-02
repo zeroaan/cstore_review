@@ -1,17 +1,19 @@
 import React from "react"
-import { StyleSheet, View, ScrollView, Text } from "react-native"
+import { StyleSheet, View, ScrollView, Text, Image } from "react-native"
 
 import ItemSimple from "./ItemSimple"
 
 import { bestStarData, bestReviewData } from "~/data/foodData"
+import HOMEIMG from "~/assets/image/homeImg.png"
 
 const Home = () => {
   return (
-    <>
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>편리</Text>
+        <Image style={styles.titleImg} source={HOMEIMG} />
       </View>
-      <View style={styles.container}>
+      <View style={styles.maincontainer}>
         <View style={styles.bestContainer}>
           <Text style={styles.bestText}>Best 상품</Text>
           <ScrollView
@@ -35,27 +37,34 @@ const Home = () => {
           </ScrollView>
         </View>
       </View>
-    </>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 12,
+    flex: 1,
   },
   titleContainer: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
     marginBottom: 8,
-    paddingTop: 12,
+    paddingTop: 18,
+    paddingBottom: 12,
   },
   title: {
     color: "rgb(0, 175, 175)",
     fontSize: 26,
     fontFamily: "DoHyeon",
   },
+  titleImg: {
+    width: "90%",
+    height: 150,
+    borderRadius: 20,
+    marginTop: 16,
+  },
+  maincontainer: {},
   bestContainer: {
     backgroundColor: "white",
     marginBottom: 8,
