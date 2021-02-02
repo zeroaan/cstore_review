@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     color: "rgb(0, 175, 175)",
-    fontSize: 23,
+    fontSize: 30,
+    fontFamily: "DoHyeon",
   },
 })
 
