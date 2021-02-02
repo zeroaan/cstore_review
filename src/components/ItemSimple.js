@@ -9,11 +9,11 @@ const ItemSimple = ({ item }) => {
         <Text style={styles.itemName}>{item.name}</Text>
         <View style={styles.itemDesc}>
           <View style={styles.itemDesc__left}>
-            <Text style={styles.itemPrice}>{item.price}원</Text>
             <Text style={styles.itemReview}>리뷰 {item.review}</Text>
+            <Text style={styles.itemStar}>평점 {item.star}</Text>
           </View>
           <View style={styles.itemDesc__rigth}>
-            <Text style={styles.itemStar}>평점 {item.star}</Text>
+            <Text style={styles.itemPrice}>{item.price}원</Text>
           </View>
         </View>
       </View>
@@ -57,9 +57,6 @@ const styles = StyleSheet.create({
   itemDesc__rigth: {
     alignItems: "flex-end",
   },
-  itemPrice: {
-    fontSize: 12,
-  },
   itemReview: {
     fontSize: 12,
     color: "rgb(100,100,100)",
@@ -67,6 +64,9 @@ const styles = StyleSheet.create({
   itemStar: {
     fontSize: 12,
     color: "rgb(254, 68, 80)",
+  },
+  itemPrice: {
+    fontSize: 13,
   },
 })
 

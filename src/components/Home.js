@@ -1,13 +1,11 @@
-import React, { useState } from "react"
+import React from "react"
 import { StyleSheet, View, ScrollView, Text } from "react-native"
 
 import ItemSimple from "./ItemSimple"
 
-import { FOODDATA } from "~/data/foodData"
+import { bestStarData, bestReviewData } from "~/data/foodData"
 
 const Home = () => {
-  const [foodData, setFoodData] = useState(FOODDATA)
-
   return (
     <>
       <View style={styles.titleContainer}>
@@ -20,8 +18,19 @@ const Home = () => {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             style={styles.bestFood}>
-            {foodData.map((v) => (
-              <ItemSimple item={v} />
+            {bestStarData.map((v) => (
+              <ItemSimple key={v.id} item={v} />
+            ))}
+          </ScrollView>
+        </View>
+        <View style={styles.bestContainer}>
+          <Text style={styles.bestText}>Best 리뷰</Text>
+          <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            style={styles.bestFood}>
+            {bestReviewData.map((v) => (
+              <ItemSimple key={v.id} item={v} />
             ))}
           </ScrollView>
         </View>
@@ -39,6 +48,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
+    marginBottom: 8,
   },
   title: {
     color: "rgb(0, 175, 175)",
@@ -47,7 +57,7 @@ const styles = StyleSheet.create({
   },
   bestContainer: {
     backgroundColor: "white",
-    marginVertical: 12,
+    marginBottom: 8,
   },
   bestText: {
     paddingHorizontal: 16,
