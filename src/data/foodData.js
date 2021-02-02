@@ -29,6 +29,36 @@ export const FOODDATA = [
     image:
       "http://img.danawa.com/prod_img/500000/427/242/img/1242427_1.jpg?shrink=500:500&_v=20181016142232",
   },
+  {
+    id: 3,
+    name: "틈새라면",
+    price: "900",
+    liked: 4,
+    review: 14,
+    star: 3.4,
+    image:
+      "http://img.danawa.com/prod_img/500000/083/967/img/2967083_1.jpg?shrink=500:500&_v=20180919085810",
+  },
+  {
+    id: 4,
+    name: "불닭볶음면",
+    price: "1,300",
+    liked: 20,
+    review: 8,
+    star: 4.8,
+    image:
+      "http://img.danawa.com/prod_img/500000/019/992/img/1992019_1.jpg?shrink=500:500&_v=20190628172738",
+  },
+  {
+    id: 5,
+    name: "짜파게티",
+    price: "1,00",
+    liked: 3,
+    review: 17,
+    star: 4.4,
+    image:
+      "https://www.costco.co.kr/medias/sys_master/images/he3/ha0/27833219842078.jpg",
+  },
 ]
 
 export const bestStarData = [...FOODDATA].sort(function (a, b) {
