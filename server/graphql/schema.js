@@ -9,6 +9,7 @@ const typeDefs = gql`
   }
   type Query {
     foods: [Food]
+    getFood(_id: ID!): Food
   }
 
   input FoodInput {
