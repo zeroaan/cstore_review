@@ -20,6 +20,7 @@ const typeDefs = gql`
   type Mutation {
     createFood(input: FoodInput): Food
     updateFood(_id: ID!, input: FoodInput): Food
+    deleteFood(_id: ID!): Food
   }
 `
 

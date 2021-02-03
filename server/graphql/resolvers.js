@@ -16,6 +16,9 @@ const resolvers = {
     updateFood: async (_, { _id, input }) => {
       return await Food.findOneAndUpdate({ _id }, input, { new: true })
     },
+    deleteFood: async (_, { _id }) => {
+      return await Food.findOneAndDelete({ _id })
+    },
   },
 }
 
