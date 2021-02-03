@@ -23,6 +23,10 @@ const reviewSchema = new Schema({
     type: String,
     required: true,
   },
+  star: {
+    type: Number,
+    required: true,
+  },
 })
 
 const foodSchema = new Schema({
@@ -44,14 +48,6 @@ const foodSchema = new Schema({
   },
   liked: {
     type: Number,
-    required: true,
-  },
-  star: {
-    type: Number,
-    required: true,
-  },
-  review: {
-    type: [reviewSchema],
     required: true,
   },
 })

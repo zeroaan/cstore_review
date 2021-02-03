@@ -7,6 +7,7 @@ const typeDefs = gql`
     nickname: String!
     date: String!
     post: String!
+    star: Float!
   }
   type Food {
     _id: ID!
@@ -15,7 +16,6 @@ const typeDefs = gql`
     price: String!
     image: String!
     liked: Int!
-    star: Float!
   }
   type Query {
     foods: [Food]
@@ -29,7 +29,6 @@ const typeDefs = gql`
     price: String!
     image: String!
     liked: Int! = 0
-    star: Float! = 0.0
   }
   input UpdateFoodInput {
     name: String
@@ -37,7 +36,6 @@ const typeDefs = gql`
     price: String
     image: String
     liked: Int
-    star: Float
   }
   input CreateReviewInput {
     id: ID!
@@ -45,6 +43,7 @@ const typeDefs = gql`
     nickname: String!
     date: String!
     post: String!
+    star: Float!
   }
   input UpdateReviewInput {
     id: ID
@@ -52,6 +51,7 @@ const typeDefs = gql`
     nickname: String
     date: String
     post: String
+    star: Float
   }
   type Mutation {
     createFood(input: CreateFoodInput): Food
