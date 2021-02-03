@@ -6,6 +6,11 @@ const resolvers = {
       return await Food.find()
     },
   },
+  Mutation: {
+    createFood: async (_, { input }) => {
+      return await Food.create(input)
+    },
+  },
 }
 
 export default resolvers

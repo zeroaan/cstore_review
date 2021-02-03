@@ -1,14 +1,23 @@
 import { gql } from "apollo-server"
 
 const typeDefs = gql`
-  type Query {
-    foods: [Food]
-  }
   type Food {
-    id: ID!
+    _id: ID!
     name: String!
     price: String!
     liked: Int!
+  }
+  type Query {
+    foods: [Food]
+  }
+
+  input FoodInput {
+    name: String!
+    price: String!
+    liked: Int!
+  }
+  type Mutation {
+    createFood(input: FoodInput): Food
   }
 `
 
