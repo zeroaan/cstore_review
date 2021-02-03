@@ -13,6 +13,9 @@ const resolvers = {
     createFood: async (_, { input }) => {
       return await Food.create(input)
     },
+    updateFood: async (_, { _id, input }) => {
+      return await Food.findOneAndUpdate({ _id }, input, { new: true })
+    },
   },
 }
 
