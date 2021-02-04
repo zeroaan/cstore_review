@@ -2,18 +2,23 @@ import React from "react"
 import { StyleSheet, View, Text, Image } from "react-native"
 
 const ItemSimple = ({ item }) => {
+  const { image, name, review, liked, price } = item
+
   return (
     <View style={styles.container}>
-      <Image style={styles.itemImage} source={{ uri: `${item.image}` }} />
+      <Image style={styles.itemImage} source={{ uri: `${image}` }} />
       <View style={styles.item}>
-        <Text style={styles.itemName}>{item.name}</Text>
+        <Text style={styles.itemName}>{name}</Text>
         <View style={styles.itemDesc}>
           <View style={styles.itemDesc__left}>
-            <Text style={styles.itemReview}>리뷰 {item.review}</Text>
-            <Text style={styles.itemStar}>평점 {item.star}</Text>
+            <Text style={styles.itemReview}>리뷰 {review.length}</Text>
+            <Text style={styles.itemLiked}>♥ {liked}</Text>
           </View>
           <View style={styles.itemDesc__rigth}>
-            <Text style={styles.itemPrice}>{item.price}원</Text>
+            <Text style={styles.itemStar}>
+              평점 {review.length === 0 ? "0.0" : "4.5"}
+            </Text>
+            <Text style={styles.itemPrice}>{price}원</Text>
           </View>
         </View>
       </View>
@@ -60,14 +65,17 @@ const styles = StyleSheet.create({
   },
   itemReview: {
     fontSize: 12,
-    color: "rgb(100,100,100)",
+    color: "rgb(75,75,75)",
   },
   itemStar: {
     fontSize: 12,
     color: "rgb(254, 68, 80)",
   },
   itemPrice: {
-    fontSize: 14,
+    fontSize: 13,
+  },
+  itemLiked: {
+    fontSize: 12,
   },
 })
 

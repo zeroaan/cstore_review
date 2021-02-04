@@ -1,12 +1,44 @@
 import React from "react"
 import { StyleSheet, View, ScrollView, Text, Image } from "react-native"
+import { gql, useQuery } from "@apollo/client"
 
 import ItemSimple from "./ItemSimple"
 
-import { bestStarData, bestReviewData } from "~/data/foodData"
 import HOMEIMG from "~/assets/image/homeImg.png"
 
+const GET_FOODS = gql`
+  query {
+    foods {
+      _id
+      name
+      price
+      image
+      liked
+      review {
+        star
+      }
+    }
+  }
+`
+
 const Home = () => {
+  const { loading, data } = useQuery(GET_FOODS)
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>Loading...</Text>
+      </View>
+    )
+  }
+
+  const bestReviewData = [...data.foods].sort(function (a, b) {
+    return b.review.length - a.review.length
+  })
+  const bestLikedData = [...data.foods].sort(function (a, b) {
+    return b.liked - a.liked
+  })
+
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
       <View style={styles.titleContainer}>
@@ -20,19 +52,19 @@ const Home = () => {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             style={styles.bestFood}>
-            {bestStarData.map((v) => (
-              <ItemSimple key={v.id} item={v} />
+            {bestReviewData?.map((v) => (
+              <ItemSimple key={v._id} item={v} />
             ))}
           </ScrollView>
         </View>
         <View style={styles.bestContainer}>
-          <Text style={styles.bestText}>Best 리뷰</Text>
+          <Text style={styles.bestText}>좋아요 많은 상품</Text>
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             style={styles.bestFood}>
-            {bestReviewData.map((v) => (
-              <ItemSimple key={v.id} item={v} />
+            {bestLikedData?.map((v) => (
+              <ItemSimple key={v._id} item={v} />
             ))}
           </ScrollView>
         </View>
