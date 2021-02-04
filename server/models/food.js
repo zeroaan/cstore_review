@@ -7,10 +7,6 @@ const reviewSchema = new Schema({
     type: String,
     required: true,
   },
-  foodId: {
-    type: String,
-    required: true,
-  },
   nickName: {
     type: String,
     required: true,
@@ -50,7 +46,10 @@ const foodSchema = new Schema({
     type: Number,
     required: true,
   },
+  review: {
+    type: [reviewSchema],
+    required: true,
+  },
 })
 
 export const Food = model("Food", foodSchema)
-export const Review = model("Review", reviewSchema)

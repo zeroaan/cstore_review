@@ -1,4 +1,4 @@
-import { Food, Review } from "../models/food"
+import { Food } from "../models/food"
 
 const resolvers = {
   Query: {
@@ -7,9 +7,6 @@ const resolvers = {
     },
     getFood: async (_, { _id }) => {
       return await Food.findById(_id)
-    },
-    getReviews: async (_, { foodId }) => {
-      return await Review.findById(foodId)
     },
   },
   Mutation: {
@@ -21,15 +18,6 @@ const resolvers = {
     },
     deleteFood: async (_, { _id }) => {
       return await Food.findOneAndDelete({ _id })
-    },
-    createReview: async (_, { input }) => {
-      return await Review.create(input)
-    },
-    updateReview: async (_, { _id, input }) => {
-      return await Review.findOneAndUpdate({ id }, input, { new: true })
-    },
-    deleteReview: async (_, { _id }) => {
-      return await Review.findOneAndDelete({ id })
     },
   },
 }
