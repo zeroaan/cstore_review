@@ -1,8 +1,11 @@
-import React from "react"
+import React, { useRef } from "react"
 import { StyleSheet, View, Text, Image } from "react-native"
 
 const ItemSimple = ({ item }) => {
   const { image, name, review, liked, price } = item
+
+  const sumStar = useRef(0)
+  review.map((v) => (sumStar.current += v.star))
 
   return (
     <View style={styles.container}>
@@ -16,7 +19,10 @@ const ItemSimple = ({ item }) => {
           </View>
           <View style={styles.itemDesc__rigth}>
             <Text style={styles.itemStar}>
-              평점 {review.length === 0 ? "0.0" : "4.5"}
+              평점{" "}
+              {review.length === 0
+                ? "0.0"
+                : (sumStar.current / review.length).toFixed(1)}
             </Text>
             <Text style={styles.itemPrice}>{price}원</Text>
           </View>

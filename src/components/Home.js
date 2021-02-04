@@ -32,11 +32,22 @@ const Home = () => {
     )
   }
 
-  const bestReviewData = [...data.foods].sort(function (a, b) {
-    return b.review.length - a.review.length
+  const bestStarData = [...data.foods].sort(function (a, b) {
+    let sumA = 0,
+      sumB = 0,
+      resultA,
+      resultB
+    a.review.map((v) => (sumA += v.star))
+    b.review.map((v) => (sumB += v.star))
+    a.review.length === 0 ? (resultA = 0) : (resultA = sumA / a.review.length)
+    b.review.length === 0 ? (resultB = 0) : (resultB = sumB / b.review.length)
+    return resultB - resultA
   })
   const bestLikedData = [...data.foods].sort(function (a, b) {
     return b.liked - a.liked
+  })
+  const bestReviewData = [...data.foods].sort(function (a, b) {
+    return b.review.length - a.review.length
   })
 
   return (
@@ -52,7 +63,7 @@ const Home = () => {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             style={styles.bestFood}>
-            {bestReviewData?.map((v) => (
+            {bestStarData?.map((v) => (
               <ItemSimple key={v._id} item={v} />
             ))}
           </ScrollView>
@@ -64,6 +75,17 @@ const Home = () => {
             showsHorizontalScrollIndicator={false}
             style={styles.bestFood}>
             {bestLikedData?.map((v) => (
+              <ItemSimple key={v._id} item={v} />
+            ))}
+          </ScrollView>
+        </View>
+        <View style={styles.bestContainer}>
+          <Text style={styles.bestText}>리뷰 많은 상품</Text>
+          <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            style={styles.bestFood}>
+            {bestReviewData?.map((v) => (
               <ItemSimple key={v._id} item={v} />
             ))}
           </ScrollView>
