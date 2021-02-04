@@ -3,7 +3,7 @@ import { gql } from "apollo-server"
 const typeDefs = gql`
   type Review {
     id: ID!
-    nickname: String!
+    nickName: String!
     date: String!
     post: String!
     star: Float!
@@ -25,7 +25,7 @@ const typeDefs = gql`
   input ReviewInput {
     id: ID
     foodId: ID
-    nickname: String
+    nickName: String
     date: String
     post: String
     star: Float
