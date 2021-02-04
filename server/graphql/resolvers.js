@@ -19,6 +19,13 @@ const resolvers = {
     deleteFood: async (_, { _id }) => {
       return await Food.findOneAndDelete({ _id })
     },
+    createReview: async (_, { _id, input }) => {
+      return await Food.findOneAndUpdate(
+        { _id },
+        { $push: input },
+        { new: true },
+      )
+    },
   },
 }
 

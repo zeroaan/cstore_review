@@ -2,7 +2,7 @@ import { gql } from "apollo-server"
 
 const typeDefs = gql`
   type Review {
-    id: ID!
+    _id: ID!
     nickName: String!
     date: String!
     post: String!
@@ -23,8 +23,6 @@ const typeDefs = gql`
   }
 
   input ReviewInput {
-    id: ID
-    foodId: ID
     nickName: String
     date: String
     post: String
@@ -46,10 +44,14 @@ const typeDefs = gql`
     liked: Int
     review: [ReviewInput]
   }
+  input CreateReviewInput {
+    review: [ReviewInput]
+  }
   type Mutation {
     createFood(input: CreateFoodInput): Food
     updateFood(_id: ID!, input: UpdateFoodInput): Food
     deleteFood(_id: ID!): Food
+    createReview(_id: ID!, input: CreateReviewInput): Food
   }
 `
 

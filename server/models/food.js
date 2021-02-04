@@ -3,10 +3,6 @@ import mongoose from "mongoose"
 const { Schema, model } = mongoose
 
 const reviewSchema = new Schema({
-  id: {
-    type: String,
-    required: true,
-  },
   nickName: {
     type: String,
     required: true,
