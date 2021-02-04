@@ -10,8 +10,10 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@apollo/client": "^3.3.7",
     "@react-navigation/bottom-tabs": "^5.11.7",
     "@react-navigation/native": "^5.9.2",
+    "graphql": "^15.5.0",
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-safe-area-context": "^3.1.9",
