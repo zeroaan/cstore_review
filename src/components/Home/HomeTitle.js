@@ -3,10 +3,6 @@ import { StyleSheet, View, Text, Image } from "react-native"
 import { gql, useQuery } from "@apollo/client"
 import Swiper from "react-native-swiper"
 
-import HOMEAD01 from "~/assets/image/homeAd01.png"
-import HOMEAD02 from "~/assets/image/homeAd02.png"
-import HOMEAD03 from "~/assets/image/homeAd03.png"
-
 const GET_NOTICES = gql`
   query {
     notices {
