@@ -3,10 +3,10 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
-import Home from "~/components/Home"
-import Search from "~/components/Search"
-import StoreInform from "~/components/StoreInform"
-import Profile from "~/components/Profile"
+import Home from "~/pages/Home"
+import Search from "~/pages/Search"
+import StoreInform from "~/pages/StoreInform"
+import Profile from "~/pages/Profile"
 
 const Tabs = createBottomTabNavigator()
 

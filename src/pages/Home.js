@@ -1,10 +1,9 @@
 import React from "react"
-import { StyleSheet, View, ScrollView, Text, Image } from "react-native"
+import { StyleSheet, View, ScrollView, Text } from "react-native"
 import { gql, useQuery } from "@apollo/client"
 
-import ItemSimple from "./ItemSimple"
-
-import HOMEIMG from "~/assets/image/homeImg.png"
+import HomeTitle from "~/components/Home/HomeTitle"
+import ItemSimple from "~/components/Home/ItemSimple"
 
 const GET_FOODS = gql`
   query {
@@ -57,10 +56,7 @@ const Home = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>편리</Text>
-        <Image style={styles.titleImg} source={HOMEIMG} />
-      </View>
+      <HomeTitle />
       <View style={styles.maincontainer}>
         {FoodData.map((fData) => (
           <View key={fData.id} style={styles.bestContainer}>
@@ -83,25 +79,6 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  titleContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "white",
-    marginBottom: 8,
-    paddingTop: 18,
-    paddingBottom: 12,
-  },
-  title: {
-    color: "rgb(0, 175, 175)",
-    fontSize: 26,
-    fontFamily: "DoHyeon",
-  },
-  titleImg: {
-    width: "90%",
-    height: 165,
-    borderRadius: 20,
-    marginTop: 16,
   },
   maincontainer: {},
   bestContainer: {
