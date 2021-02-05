@@ -17,9 +17,17 @@ const typeDefs = gql`
     liked: Int!
     review: [Review]!
   }
+  type Notice {
+    _id: ID!
+    title: String!
+    date: String!
+    desc: String!
+    image: String!
+  }
   type Query {
     foods: [Food]
     getFood(_id: ID!): Food
+    notices: [Notice]
   }
 
   input ReviewInput {
@@ -47,11 +55,26 @@ const typeDefs = gql`
   input CreateReviewInput {
     review: [ReviewInput]
   }
+  input CreateNoticeInput {
+    title: String!
+    date: String!
+    desc: String!
+    image: String!
+  }
+  input UpdateNoticeInput {
+    title: String
+    date: String
+    desc: String
+    image: String
+  }
   type Mutation {
     createFood(input: CreateFoodInput): Food
     updateFood(_id: ID!, input: UpdateFoodInput): Food
     deleteFood(_id: ID!): Food
     createReview(_id: ID!, input: CreateReviewInput): Food
+    createNotice(input: CreateNoticeInput): Notice
+    updateNotice(_id: ID!, input: CreateNoticeInput): Notice
+    deleteNotice(_id: ID!): Notice
   }
 `
 

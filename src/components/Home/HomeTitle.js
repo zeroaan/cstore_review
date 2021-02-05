@@ -1,25 +1,41 @@
 import React from "react"
 import { StyleSheet, View, Text, Image } from "react-native"
+import { gql, useQuery } from "@apollo/client"
 import Swiper from "react-native-swiper"
 
 import HOMEAD01 from "~/assets/image/homeAd01.png"
 import HOMEAD02 from "~/assets/image/homeAd02.png"
 import HOMEAD03 from "~/assets/image/homeAd03.png"
 
+const GET_NOTICES = gql`
+  query {
+    notices {
+      _id
+      image
+    }
+  }
+`
+
 const HomeTitle = () => {
+  const { loading, data } = useQuery(GET_NOTICES)
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>Loading...</Text>
+      </View>
+    )
+  }
+
   return (
     <View style={styles.titleContainer}>
       <Text style={styles.title}>편리</Text>
       <Swiper style={styles.swiper} autoplay={true} autoplayTimeout={6}>
-        <View style={styles.imgView}>
-          <Image style={styles.titleImg} source={HOMEAD01} />
-        </View>
-        <View style={styles.imgView}>
-          <Image style={styles.titleImg} source={HOMEAD02} />
-        </View>
-        <View style={styles.imgView}>
-          <Image style={styles.titleImg} source={HOMEAD03} />
-        </View>
+        {data?.notices?.map((v) => (
+          <View key={v._id} style={styles.imgView}>
+            <Image style={styles.titleImg} source={{ uri: v.image }} />
+          </View>
+        ))}
       </Swiper>
     </View>
   )

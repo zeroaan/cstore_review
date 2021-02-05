@@ -1,4 +1,5 @@
 import { Food } from "../models/food"
+import { Notice } from "../models/notice"
 
 const resolvers = {
   Query: {
@@ -7,6 +8,9 @@ const resolvers = {
     },
     getFood: async (_, { _id }) => {
       return await Food.findById(_id)
+    },
+    notices: async () => {
+      return await Notice.find()
     },
   },
   Mutation: {
@@ -25,6 +29,15 @@ const resolvers = {
         { $push: input },
         { new: true },
       )
+    },
+    createNotice: async (_, { input }) => {
+      return await Notice.create(input)
+    },
+    updateNotice: async (_, { _id, input }) => {
+      return await Notice.findOneAndUpdate({ _id }, input, { new: true })
+    },
+    deleteNotice: async (_, { _id }) => {
+      return await Notice.findOneAndDelete({ _id })
     },
   },
 }
