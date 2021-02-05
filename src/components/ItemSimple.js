@@ -5,7 +5,7 @@ const ItemSimple = ({ item }) => {
   const { image, name, review, liked, price } = item
 
   const sumStar = useRef(0)
-  review.map((v) => (sumStar.current += v.star))
+  sumStar.current === 0 && review.map((v) => (sumStar.current += v.star))
 
   return (
     <View style={styles.container}>
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     marginVertical: 4,
     borderRadius: 10,
-    width: 130,
+    width: 135,
     backgroundColor: "#ffffff",
     elevation: 3,
   },
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   itemDesc: {
-    marginTop: 4,
+    marginTop: 8,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -73,15 +73,15 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "rgb(75,75,75)",
   },
+  itemLiked: {
+    fontSize: 13,
+  },
   itemStar: {
     fontSize: 12,
     color: "rgb(254, 68, 80)",
   },
   itemPrice: {
     fontSize: 13,
-  },
-  itemLiked: {
-    fontSize: 12,
   },
 })
 

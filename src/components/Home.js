@@ -49,6 +49,11 @@ const Home = () => {
   const bestReviewData = [...data.foods].sort(function (a, b) {
     return b.review.length - a.review.length
   })
+  const FoodData = [
+    { id: 0, title: "Best 상품", data: bestStarData },
+    { id: 1, title: "좋아요 많은 상품", data: bestLikedData },
+    { id: 2, title: "리뷰 많은 상품", data: bestReviewData },
+  ]
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
@@ -57,39 +62,19 @@ const Home = () => {
         <Image style={styles.titleImg} source={HOMEIMG} />
       </View>
       <View style={styles.maincontainer}>
-        <View style={styles.bestContainer}>
-          <Text style={styles.bestText}>Best 상품</Text>
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            style={styles.bestFood}>
-            {bestStarData?.map((v) => (
-              <ItemSimple key={v._id} item={v} />
-            ))}
-          </ScrollView>
-        </View>
-        <View style={styles.bestContainer}>
-          <Text style={styles.bestText}>좋아요 많은 상품</Text>
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            style={styles.bestFood}>
-            {bestLikedData?.map((v) => (
-              <ItemSimple key={v._id} item={v} />
-            ))}
-          </ScrollView>
-        </View>
-        <View style={styles.bestContainer}>
-          <Text style={styles.bestText}>리뷰 많은 상품</Text>
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            style={styles.bestFood}>
-            {bestReviewData?.map((v) => (
-              <ItemSimple key={v._id} item={v} />
-            ))}
-          </ScrollView>
-        </View>
+        {FoodData.map((fData) => (
+          <View key={fData.id} style={styles.bestContainer}>
+            <Text style={styles.bestText}>{fData.title}</Text>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              style={styles.bestFood}>
+              {fData.data?.map((v) => (
+                <ItemSimple key={v._id} item={v} />
+              ))}
+            </ScrollView>
+          </View>
+        ))}
       </View>
     </ScrollView>
   )
@@ -114,7 +99,7 @@ const styles = StyleSheet.create({
   },
   titleImg: {
     width: "90%",
-    height: 150,
+    height: 165,
     borderRadius: 20,
     marginTop: 16,
   },
