@@ -1,10 +1,10 @@
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"
 
-const StoreInform = () => {
+const FoodList = () => {
   return (
     <View style={styles.container}>
-      <Text>StoreInform</Text>
+      <Text>FoodList</Text>
     </View>
   )
 }
@@ -17,4 +17,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default StoreInform
+export default FoodList
