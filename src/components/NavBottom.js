@@ -49,7 +49,8 @@ const NavBottom = () => {
       <TouchableOpacityStyled
         key={tab}
         $focus={pathname === route}
-        onPress={() => history.push(route)}>
+        onPress={() => history.push(route)}
+        activeOpacity={1}>
         <Icon
           name={iconName}
           color={pathname === route ? "rgb(0, 175, 175)" : "rgb(200,200,200)"}
