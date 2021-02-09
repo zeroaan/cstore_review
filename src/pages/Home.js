@@ -1,36 +1,10 @@
 import React from "react"
 import { StyleSheet, View, ScrollView, Text } from "react-native"
-import { gql, useQuery } from "@apollo/client"
 
 import HomeTitle from "~/components/Home/HomeTitle"
 import ItemSimple from "~/components/Home/ItemSimple"
 
-const GET_FOODS = gql`
-  query {
-    foods {
-      _id
-      name
-      price
-      image
-      liked
-      review {
-        star
-      }
-    }
-  }
-`
-
-const Home = () => {
-  const { loading, data } = useQuery(GET_FOODS)
-
-  if (loading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Loading...</Text>
-      </View>
-    )
-  }
-
+const Home = ({ data }) => {
   const bestStarData = [...data.foods].sort(function (a, b) {
     let sumA = 0,
       sumB = 0,
