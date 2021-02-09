@@ -1,11 +1,15 @@
-import React from "react"
+import React, { useContext } from "react"
 import { StyleSheet, View, ScrollView, Text } from "react-native"
+
+import { FoodDataContext } from "~/context"
 
 import HomeTitle from "~/components/Home/HomeTitle"
 import ItemSimple from "~/components/Home/ItemSimple"
 
-const Home = ({ data }) => {
-  const bestStarData = [...data.foods].sort(function (a, b) {
+const Home = () => {
+  const { foods } = useContext(FoodDataContext)
+
+  const bestStarData = [...foods].sort(function (a, b) {
     let sumA = 0,
       sumB = 0,
       resultA,
@@ -16,10 +20,10 @@ const Home = ({ data }) => {
     b.review.length === 0 ? (resultB = 0) : (resultB = sumB / b.review.length)
     return resultB - resultA
   })
-  const bestLikedData = [...data.foods].sort(function (a, b) {
+  const bestLikedData = [...foods].sort(function (a, b) {
     return b.liked - a.liked
   })
-  const bestReviewData = [...data.foods].sort(function (a, b) {
+  const bestReviewData = [...foods].sort(function (a, b) {
     return b.review.length - a.review.length
   })
   const FoodData = [
