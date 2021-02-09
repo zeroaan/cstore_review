@@ -1,37 +1,68 @@
 import React from "react"
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
-import { useHistory } from "react-router-native"
+import { useHistory, useLocation } from "react-router-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
+import styled from "styled-components"
+
+const TouchableOpacityStyled = styled(TouchableOpacity)`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 0;
+  border-style: solid;
+  border-top-width: 1px;
+  border-top-color: ${(props) =>
+    props.$focus ? "rgb(0, 175, 175)" : "rgb(230,230,230)"};
+`
+
+const TextStyled = styled(Text)`
+  font-size: 12px;
+  color: ${(props) => (props.$focus ? "rgb(0, 175, 175)" : "rgb(200,200,200)")};
+`
 
 const NavBottom = () => {
   const history = useHistory()
+  const { pathname } = useLocation()
+
+  const tabValue = ["home", "search", "foodlist", "profile"]
+
+  const tabNavigation = (tab) => {
+    let iconName, route, text
+    if (tab === "home") {
+      iconName = "home"
+      route = "/"
+      text = "홈"
+    } else if (tab === "search") {
+      iconName = "search"
+      route = "/search"
+      text = "검색"
+    } else if (tab === "foodlist") {
+      iconName = "apps"
+      route = "/foodlist"
+      text = "상품정보"
+    } else if (tab === "profile") {
+      iconName = "person"
+      route = "/profile"
+      text = "내정보"
+    }
+    return (
+      <TouchableOpacityStyled
+        key={tab}
+        $focus={pathname === route}
+        onPress={() => history.push(route)}>
+        <Icon
+          name={iconName}
+          color={pathname === route ? "rgb(0, 175, 175)" : "rgb(200,200,200)"}
+          size={25}
+        />
+        <TextStyled $focus={pathname === route}>{text}</TextStyled>
+      </TouchableOpacityStyled>
+    )
+  }
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.navButton}
-        onPress={() => history.push("/")}>
-        <Icon name="home" color="rgb(0, 175, 175)" size={30} />
-        <Text>홈</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.navButton}
-        onPress={() => history.push("/search")}>
-        <Icon name="search" color="rgb(0, 175, 175)" size={30} />
-        <Text>검색</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.navButton}
-        onPress={() => history.push("/foodlist")}>
-        <Icon name="apps" color="rgb(0, 175, 175)" size={30} />
-        <Text>상품정보</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.navButton}
-        onPress={() => history.push("/profile")}>
-        <Icon name="person" color="rgb(0, 175, 175)" size={30} />
-        <Text>내정보</Text>
-      </TouchableOpacity>
+      {tabValue.map((v) => tabNavigation(v))}
     </View>
   )
 }
@@ -41,14 +72,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-  },
-  navButton: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingVertical: 5,
-    borderTopWidth: 1,
-    borderTopColor: "rgb(225,225,225)",
   },
 })
 
