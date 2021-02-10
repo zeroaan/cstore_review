@@ -24,46 +24,29 @@ const NavBottom = () => {
   const history = useHistory()
   const { pathname } = useLocation()
 
-  const tabValue = ["home", "search", "foodlist", "profile"]
-
-  const tabNavigation = (tab) => {
-    let iconName, route, text
-    if (tab === "home") {
-      iconName = "home"
-      route = "/"
-      text = "홈"
-    } else if (tab === "search") {
-      iconName = "search"
-      route = "/search"
-      text = "검색"
-    } else if (tab === "foodlist") {
-      iconName = "apps"
-      route = "/foodlist"
-      text = "상품정보"
-    } else if (tab === "profile") {
-      iconName = "person"
-      route = "/profile"
-      text = "내정보"
-    }
-    return (
-      <TouchableOpacityStyled
-        key={tab}
-        $focus={pathname === route}
-        onPress={() => history.push(route)}
-        activeOpacity={1}>
-        <Icon
-          name={iconName}
-          color={pathname === route ? "rgb(0, 175, 175)" : "rgb(200,200,200)"}
-          size={25}
-        />
-        <TextStyled $focus={pathname === route}>{text}</TextStyled>
-      </TouchableOpacityStyled>
-    )
-  }
+  const tabValue = [
+    { tab: "home", iconName: "home", route: "/", text: "홈" },
+    { tab: "search", iconName: "search", route: "/search", text: "검색" },
+    { tab: "foodlist", iconName: "apps", route: "/foodlist", text: "상품검색" },
+    { tab: "profile", iconName: "person", route: "/profile", text: "내정보" },
+  ]
 
   return (
     <View style={styles.container}>
-      {tabValue.map((v) => tabNavigation(v))}
+      {tabValue.map((v) => (
+        <TouchableOpacityStyled
+          key={v.tab}
+          $focus={pathname === v.route}
+          onPress={() => history.push(v.route)}
+          activeOpacity={1}>
+          <Icon
+            name={v.iconName}
+            color={pathname === v.route ? "rgb(0,175,175)" : "rgb(200,200,200)"}
+            size={25}
+          />
+          <TextStyled $focus={pathname === v.route}>{v.text}</TextStyled>
+        </TouchableOpacityStyled>
+      ))}
     </View>
   )
 }
