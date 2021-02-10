@@ -21,6 +21,10 @@ const GET_FOODS = gql`
       image
       liked
       review {
+        _id
+        nickName
+        date
+        post
         star
       }
     }

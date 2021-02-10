@@ -13,7 +13,18 @@ const ItemSimple = ({ item }) => {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => history.push(`/food/${_id}`)}
+      onPress={() =>
+        history.push({
+          pathname: `/food/${_id}`,
+          state: {
+            food: item,
+            star:
+              review.length === 0
+                ? "0.0"
+                : (sumStar.current / review.length).toFixed(1),
+          },
+        })
+      }
       activeOpacity={1}>
       <Image style={styles.itemImage} source={{ uri: `${image}` }} />
       <View style={styles.item}>
