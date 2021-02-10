@@ -1,11 +1,15 @@
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"
 
+import Layout from "~/components/Layout"
+
 const Profile = () => {
   return (
-    <View style={styles.container}>
-      <Text>Profile</Text>
-    </View>
+    <Layout>
+      <View style={styles.container}>
+        <Text>Profile</Text>
+      </View>
+    </Layout>
   )
 }
 

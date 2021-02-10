@@ -1,11 +1,15 @@
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"
 
+import Layout from "~/components/Layout"
+
 const Search = () => {
   return (
-    <View style={styles.container}>
-      <Text>Search</Text>
-    </View>
+    <Layout>
+      <View style={styles.container}>
+        <Text>Search</Text>
+      </View>
+    </Layout>
   )
 }
 

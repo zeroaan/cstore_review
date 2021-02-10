@@ -3,6 +3,7 @@ import { StyleSheet, View, ScrollView, Text } from "react-native"
 
 import { FoodDataContext } from "~/context"
 
+import Layout from "~/components/Layout"
 import HomeTitle from "~/components/Home/HomeTitle"
 import ItemSimple from "~/components/Home/ItemSimple"
 
@@ -33,24 +34,26 @@ const Home = () => {
   ]
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-      <HomeTitle />
-      <View style={styles.maincontainer}>
-        {FoodData.map((fData) => (
-          <View key={fData.id} style={styles.bestContainer}>
-            <Text style={styles.bestText}>{fData.title}</Text>
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              style={styles.bestFood}>
-              {fData.data?.map((v) => (
-                <ItemSimple key={v._id} item={v} />
-              ))}
-            </ScrollView>
-          </View>
-        ))}
-      </View>
-    </ScrollView>
+    <Layout>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+        <HomeTitle />
+        <View style={styles.maincontainer}>
+          {FoodData.map((fData) => (
+            <View key={fData.id} style={styles.bestContainer}>
+              <Text style={styles.bestText}>{fData.title}</Text>
+              <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                style={styles.bestFood}>
+                {fData.data?.map((v) => (
+                  <ItemSimple key={v._id} item={v} />
+                ))}
+              </ScrollView>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
+    </Layout>
   )
 }
 

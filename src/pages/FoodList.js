@@ -1,11 +1,15 @@
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"
 
+import Layout from "~/components/Layout"
+
 const FoodList = () => {
   return (
-    <View style={styles.container}>
-      <Text>FoodList</Text>
-    </View>
+    <Layout>
+      <View style={styles.container}>
+        <Text>FoodList</Text>
+      </View>
+    </Layout>
   )
 }
 

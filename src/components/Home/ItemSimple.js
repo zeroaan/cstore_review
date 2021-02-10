@@ -1,14 +1,20 @@
 import React, { useRef } from "react"
-import { StyleSheet, View, Text, Image } from "react-native"
+import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native"
+import { useHistory } from "react-router-native"
 
 const ItemSimple = ({ item }) => {
-  const { image, name, review, liked, price } = item
+  const { _id, image, name, review, liked, price } = item
+
+  const history = useHistory()
 
   const sumStar = useRef(0)
   sumStar.current === 0 && review.map((v) => (sumStar.current += v.star))
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => history.push(`/food/${_id}`)}
+      activeOpacity={1}>
       <Image style={styles.itemImage} source={{ uri: `${image}` }} />
       <View style={styles.item}>
         <Text style={styles.itemName}>{name}</Text>
@@ -28,7 +34,7 @@ const ItemSimple = ({ item }) => {
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

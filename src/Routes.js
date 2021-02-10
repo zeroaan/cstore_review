@@ -1,5 +1,4 @@
-import React, { useEffect } from "react"
-import { BackHandler, Alert } from "react-native"
+import React from "react"
 import { NativeRouter, Switch, Route } from "react-router-native"
 import { gql, useQuery } from "@apollo/client"
 
@@ -10,13 +9,14 @@ import Home from "~/pages/Home"
 import Search from "~/pages/Search"
 import FoodList from "~/pages/FoodList"
 import Profile from "~/pages/Profile"
-import NavBottom from "~/components/NavBottom"
+import FoodDetail from "~/components/FoodDetail"
 
 const GET_FOODS = gql`
   query {
     foods {
       _id
       name
+      fullName
       price
       image
       liked
@@ -28,20 +28,6 @@ const GET_FOODS = gql`
 `
 
 const Routes = () => {
-  const backAction = () => {
-    Alert.alert("", "편리를 종료하시겠습니까?", [
-      { text: "취소", onPress: () => null },
-      { text: "종료", onPress: () => BackHandler.exitApp() },
-    ])
-    return true
-  }
-
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", backAction)
-    return () =>
-      BackHandler.removeEventListener("hardwareBackPress", backAction)
-  }, [])
-
   const { loading, data } = useQuery(GET_FOODS)
 
   if (loading) {
@@ -56,8 +42,8 @@ const Routes = () => {
           <Route path="/search" component={Search} />
           <Route path="/foodlist" component={FoodList} />
           <Route path="/profile" component={Profile} />
+          <Route path="/food/:foodId" component={FoodDetail} />
         </Switch>
-        <NavBottom />
       </NativeRouter>
     </FoodDataContext.Provider>
   )
