@@ -55,11 +55,33 @@ const FoodDetail = () => {
           <Icon name="create" color="rgb(180,180,180)" size={15} />
           <Text style={styles.foodSubDesc}>리뷰 {food.review.length}</Text>
         </View>
-        <View style={styles.foodReviewContainer}>
-          <TouchableOpacity style={styles.foodReviewBt}>
+        <View style={styles.foodReviewBtContainer}>
+          <TouchableOpacity style={styles.foodReviewBt} activeOpacity={0.7}>
             <Icon name="create" color="rgb(255,255,255)" size={15} />
             <Text style={styles.foodReviewBtText}>리뷰 쓰기</Text>
           </TouchableOpacity>
+        </View>
+        <View style={styles.foodReviewContainer}>
+          {food.review.length === 0 ? (
+            <Text style={styles.foodReviewText}>리뷰가 없습니다.</Text>
+          ) : (
+            <Text style={styles.foodReviewText}>
+              리뷰 ({food.review.length})
+            </Text>
+          )}
+          {food.review.map((v) => (
+            <View key={v._id} style={styles.foodReview}>
+              <View style={styles.foodReviewTop}>
+                <Icon name="person-outline" color="rgb(0,175,175)" size={28} />
+                <View style={styles.foodReviewTopMid}>
+                  <Text style={styles.foodReviewNickName}>{v.nickName}</Text>
+                  <Text style={styles.foodReviewDate}>{v.date}</Text>
+                </View>
+                <Text style={styles.foodReviewStar}>⭐ {v.star}</Text>
+              </View>
+              <Text style={styles.foodReviewPost}>{v.post}</Text>
+            </View>
+          ))}
         </View>
       </ScrollView>
     </>
@@ -72,6 +94,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     padding: 16,
+    backgroundColor: "rgb(255,255,255)",
   },
   topText: {
     fontSize: 18,
@@ -79,6 +102,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    backgroundColor: "rgb(255,255,255)",
   },
   imageContainer: {
     justifyContent: "center",
@@ -111,7 +135,7 @@ const styles = StyleSheet.create({
   foodSubContainer: {
     marginVertical: 10,
     marginHorizontal: 30,
-    paddingBottom: 35,
+    paddingBottom: 50,
     flexDirection: "row",
     alignItems: "center",
     borderColor: "rgb(200,200,200)",
@@ -123,8 +147,8 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     marginRight: 14,
   },
-  foodReviewContainer: {
-    marginTop: 25,
+  foodReviewBtContainer: {
+    marginTop: 40,
     alignItems: "center",
   },
   foodReviewBt: {
@@ -140,6 +164,50 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "rgb(255,255,255)",
     marginLeft: 10,
+  },
+  foodReviewContainer: {
+    margin: 30,
+  },
+  foodReviewText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  foodReview: {
+    paddingVertical: 26,
+    paddingHorizontal: 20,
+    marginVertical: 8,
+    borderRadius: 10,
+    backgroundColor: "rgb(255,255,255)",
+    elevation: 3,
+  },
+  foodReviewTop: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  foodReviewTopMid: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "flex-end",
+    marginLeft: 10,
+  },
+  foodReviewNickName: {
+    fontSize: 16,
+    color: "rgb(0,0,0)",
+  },
+  foodReviewDate: {
+    marginLeft: 10,
+    fontSize: 14,
+    color: "rgb(150,150,150)",
+  },
+  foodReviewStar: {
+    fontSize: 16,
+    color: "rgb(254, 68, 80)",
+  },
+  foodReviewPost: {
+    fontSize: 16,
+    color: "rgb(0,0,0)",
   },
 })
 
