@@ -9,7 +9,7 @@ import Home from "~/pages/Home"
 import Search from "~/pages/Search"
 import FoodList from "~/pages/FoodList"
 import Profile from "~/pages/Profile"
-import FoodDetail from "~/components/FoodDetail"
+import FoodDetail from "~/pages/FoodDetail"
 
 const GET_FOODS = gql`
   query {

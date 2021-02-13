@@ -4,8 +4,8 @@ import { StyleSheet, View, ScrollView, Text } from "react-native"
 import { FoodDataContext } from "~/context"
 
 import Layout from "~/components/Layout"
-import HomeTitle from "~/components/Home/HomeTitle"
-import ItemSimple from "~/components/Home/ItemSimple"
+import HomeTop from "~/components/Home/HomeTop"
+import FoodSimple from "~/components/Home/FoodSimple"
 
 const Home = () => {
   const { foods } = useContext(FoodDataContext)
@@ -36,7 +36,7 @@ const Home = () => {
   return (
     <Layout>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-        <HomeTitle />
+        <HomeTop />
         <View style={styles.maincontainer}>
           {FoodData.map((fData) => (
             <View key={fData.id} style={styles.bestContainer}>
@@ -46,7 +46,7 @@ const Home = () => {
                 showsHorizontalScrollIndicator={false}
                 style={styles.bestFood}>
                 {fData.data?.map((v) => (
-                  <ItemSimple key={v._id} item={v} />
+                  <FoodSimple key={v._id} item={v} />
                 ))}
               </ScrollView>
             </View>

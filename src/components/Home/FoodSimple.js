@@ -2,7 +2,7 @@ import React, { useRef } from "react"
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native"
 import { useHistory } from "react-router-native"
 
-const ItemSimple = ({ item }) => {
+const FoodSimple = ({ item }) => {
   const { _id, image, name, review, liked, price } = item
 
   const history = useHistory()
@@ -102,4 +102,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default ItemSimple
+export default FoodSimple

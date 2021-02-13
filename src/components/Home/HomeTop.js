@@ -12,7 +12,7 @@ const GET_NOTICES = gql`
   }
 `
 
-const HomeTitle = () => {
+const HomeTop = () => {
   const { loading, data } = useQuery(GET_NOTICES)
 
   if (loading) {
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default HomeTitle
+export default HomeTop
