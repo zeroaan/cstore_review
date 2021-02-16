@@ -10,6 +10,7 @@ import Search from "~/pages/Search"
 import FoodList from "~/pages/FoodList"
 import Profile from "~/pages/Profile"
 import FoodDetail from "~/pages/FoodDetail"
+import Login from "~/pages/Login"
 
 const GET_FOODS = gql`
   query {
@@ -47,6 +48,7 @@ const Routes = () => {
           <Route path="/search" component={Search} />
           <Route path="/foodlist" component={FoodList} />
           <Route path="/profile" component={Profile} />
+          <Route path="/login" component={Login} />
           <Route path="/food/:foodId" component={FoodDetail} />
         </Switch>
       </NativeRouter>
