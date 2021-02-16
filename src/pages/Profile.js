@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   beforeLoginBt: {
     width: 200,
     height: 40,
-    backgroundColor: "rgb(254, 68, 80)",
+    backgroundColor: "rgb(0, 175, 175)",
     borderRadius: 50,
     flexDirection: "row",
     justifyContent: "center",
