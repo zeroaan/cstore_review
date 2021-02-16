@@ -22,7 +22,8 @@ const GET_FOODS = gql`
       liked
       review {
         _id
-        nickName
+        userid
+        username
         date
         post
         star

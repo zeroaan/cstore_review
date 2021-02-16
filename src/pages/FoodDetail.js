@@ -45,7 +45,7 @@ const FoodDetail = () => {
         </View>
         <View style={styles.foodSubContainer}>
           <Icon name="favorite" color="rgb(180,180,180)" size={15} />
-          <Text style={styles.foodSubDesc}>좋아요 {food.liked}</Text>
+          <Text style={styles.foodSubDesc}>좋아요 {food.liked.length}</Text>
           <Icon name="create" color="rgb(180,180,180)" size={15} />
           <Text style={styles.foodSubDesc}>리뷰 {food.review.length}</Text>
         </View>

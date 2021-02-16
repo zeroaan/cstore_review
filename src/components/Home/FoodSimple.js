@@ -32,7 +32,7 @@ const FoodSimple = ({ item }) => {
         <View style={styles.itemDesc}>
           <View style={styles.itemDesc__left}>
             <Text style={styles.itemReview}>리뷰 {review.length}</Text>
-            <Text style={styles.itemLiked}>♥ {liked}</Text>
+            <Text style={styles.itemLiked}>♥ {liked.length}</Text>
           </View>
           <View style={styles.itemDesc__rigth}>
             <Text style={styles.itemStar}>

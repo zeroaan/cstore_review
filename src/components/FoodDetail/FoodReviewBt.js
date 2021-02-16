@@ -6,7 +6,7 @@ const FoodReviewBt = () => {
   return (
     <>
       <View style={styles.foodReviewBtContainer}>
-        <TouchableOpacity style={styles.foodReviewBt} activeOpacity={0.9}>
+        <TouchableOpacity style={styles.foodReviewBt} activeOpacity={0.7}>
           <Icon name="create" color="rgb(255,255,255)" size={15} />
           <Text style={styles.foodReviewBtText}>리뷰 쓰기</Text>
         </TouchableOpacity>
@@ -22,9 +22,9 @@ const styles = StyleSheet.create({
   },
   foodReviewBt: {
     width: 150,
+    height: 45,
     backgroundColor: "rgb(254, 68, 80)",
     borderRadius: 50,
-    height: 45,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",

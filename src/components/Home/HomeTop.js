@@ -43,8 +43,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "white",
     marginBottom: 8,
-    paddingTop: 18,
-    paddingBottom: 12,
+    paddingVertical: 18,
   },
   title: {
     color: "rgb(0, 175, 175)",

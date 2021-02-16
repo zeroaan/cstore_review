@@ -16,7 +16,7 @@ const FoodReview = ({ review }) => {
             <View style={styles.foodReviewTop}>
               <Icon name="person-outline" color="rgb(0,175,175)" size={28} />
               <View style={styles.foodReviewTopMid}>
-                <Text style={styles.foodReviewNickName}>{v.nickName}</Text>
+                <Text style={styles.foodReviewUserName}>{v.username}</Text>
                 <Text style={styles.foodReviewDate}>{v.date}</Text>
               </View>
               <Text style={styles.foodReviewStar}>⭐ {v.star}</Text>
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     marginLeft: 10,
   },
-  foodReviewNickName: {
+  foodReviewUserName: {
     fontSize: 16,
     color: "rgb(0,0,0)",
   },
