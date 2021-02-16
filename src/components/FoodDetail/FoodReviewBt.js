@@ -1,12 +1,32 @@
-import React from "react"
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
+import React, { useContext } from "react"
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native"
+import { useHistory } from "react-router-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
+import { DataContext } from "~/context"
+
 const FoodReviewBt = () => {
+  const { users } = useContext(DataContext)
+  const history = useHistory()
+
+  const onPressReviewBt = () => {
+    if (users) {
+      return
+    }
+    Alert.alert("", "로그인 후 이용 가능합니다.", [
+      { text: "취소", onPress: () => null },
+      { text: "로그인", onPress: () => history.push("/login") },
+    ])
+    return true
+  }
+
   return (
     <>
       <View style={styles.foodReviewBtContainer}>
-        <TouchableOpacity style={styles.foodReviewBt} activeOpacity={0.7}>
+        <TouchableOpacity
+          style={styles.foodReviewBt}
+          activeOpacity={0.7}
+          onPress={onPressReviewBt}>
           <Icon name="create" color="rgb(255,255,255)" size={15} />
           <Text style={styles.foodReviewBtText}>리뷰 쓰기</Text>
         </TouchableOpacity>

@@ -1,14 +1,14 @@
 import React, { useContext } from "react"
 import { StyleSheet, View, ScrollView, Text } from "react-native"
 
-import { FoodDataContext } from "~/context"
+import { DataContext } from "~/context"
 
 import Layout from "~/components/Layout"
 import HomeTop from "~/components/Home/HomeTop"
 import FoodSimple from "~/components/Home/FoodSimple"
 
 const Home = () => {
-  const { foods } = useContext(FoodDataContext)
+  const { foods } = useContext(DataContext)
 
   const bestStarData = [...foods].sort(function (a, b) {
     let sumA = 0,

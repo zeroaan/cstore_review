@@ -2,7 +2,7 @@ import React from "react"
 import { NativeRouter, Switch, Route } from "react-router-native"
 import { gql, useQuery } from "@apollo/client"
 
-import { FoodDataContext } from "~/context"
+import { DataContext } from "~/context"
 
 import Loading from "~/components/Loading"
 import Home from "~/pages/Home"
@@ -41,7 +41,7 @@ const Routes = () => {
   }
 
   return (
-    <FoodDataContext.Provider value={data}>
+    <DataContext.Provider value={data}>
       <NativeRouter>
         <Switch>
           <Route exact path="/" component={Home} />
@@ -52,7 +52,7 @@ const Routes = () => {
           <Route path="/food/:foodId" component={FoodDetail} />
         </Switch>
       </NativeRouter>
-    </FoodDataContext.Provider>
+    </DataContext.Provider>
   )
 }
 

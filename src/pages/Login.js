@@ -50,7 +50,6 @@ const Login = () => {
             returnKeyType="next"
             autoCapitalize="none"
             maxLength={30}
-            autoFocus
           />
         </View>
         <View style={styles.textInputContainer}>

@@ -1,3 +1,8 @@
 import { createContext } from "react"
 
-export const FoodDataContext = createContext(null)
+const data = {
+  foods: null,
+  users: null,
+}
+
+export const DataContext = createContext(data)
