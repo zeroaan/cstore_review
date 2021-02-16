@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   foodReviewBt: {
     width: 150,
     height: 45,
-    backgroundColor: "rgb(254, 68, 80)",
+    backgroundColor: "rgb(0, 175, 175)",
     borderRadius: 50,
     flexDirection: "row",
     justifyContent: "center",
