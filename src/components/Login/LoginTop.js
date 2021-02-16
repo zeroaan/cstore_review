@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native"
 import { useHistory } from "react-router-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
-const FoodReview = () => {
+const LoginTop = () => {
   const history = useHistory()
 
   return (
@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default FoodReview
+export default LoginTop
