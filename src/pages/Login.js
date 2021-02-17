@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import {
   View,
   Text,
@@ -14,6 +14,7 @@ const Login = () => {
   const history = useHistory()
   const [inputEmail, setInputEmail] = useState("")
   const [inputPassword, setInputPassword] = useState("")
+  const pwRef = useRef(null)
 
   const backAction = () => {
     history.goBack()
@@ -46,6 +47,7 @@ const Login = () => {
             style={styles.loginTextInput}
             value={inputEmail}
             onChangeText={(v) => setInputEmail(v)}
+            onSubmitEditing={() => pwRef?.current?.focus()}
             placeholder="이메일 입력"
             returnKeyType="next"
             autoCapitalize="none"
@@ -54,6 +56,7 @@ const Login = () => {
         </View>
         <View style={styles.textInputContainer}>
           <TextInput
+            ref={pwRef}
             style={styles.loginTextInput}
             value={inputPassword}
             onChangeText={(v) => setInputPassword(v)}
