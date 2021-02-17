@@ -1,16 +1,14 @@
-import React, { useState } from "react"
-import { View, Text, StyleSheet, TextInput } from "react-native"
+import React from "react"
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { useHistory } from "react-router-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
 import LayoutGoBack from "~/components/LayoutGoBack"
-import MyTextInput from "~/components/MyTextInput"
+import MyTextInput from "~/components/Signup/MyTextInput"
+import CheckUser from "~/components/Signup/CheckUser"
 
 const Signup = () => {
   const history = useHistory()
-  const [inputEmail, setInputEmail] = useState("")
-  const [inputPw, setInputPw] = useState("")
-  const [inputRePw, setInputRePw] = useState("")
 
   return (
     <LayoutGoBack>
@@ -26,7 +24,9 @@ const Signup = () => {
       </View>
 
       <View style={styles.container}>
-        <MyTextInput label="이메일" placeholder="이메일 주소를 입력해주세요" />
+        <MyTextInput label="이메일" placeholder="이메일 주소를 입력해주세요">
+          <CheckUser />
+        </MyTextInput>
         <MyTextInput label="비밀번호" placeholder="비밀번호 (8자 이상)" />
         <MyTextInput
           label="비밀번호 확인"
@@ -35,9 +35,14 @@ const Signup = () => {
         <MyTextInput
           label="닉네임"
           placeholder="닉네임을 입력해주세요"
-          returnKeyType="done"
-        />
+          returnKeyType="done">
+          <CheckUser />
+        </MyTextInput>
       </View>
+
+      <TouchableOpacity style={styles.signupBt} activeOpacity={0.7}>
+        <Text style={styles.signupBtText}>완료</Text>
+      </TouchableOpacity>
     </LayoutGoBack>
   )
 }
@@ -65,21 +70,15 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(255,255,255)",
     marginHorizontal: 20,
   },
-  labelText: {
-    fontSize: 16,
-    marginTop: 20,
-    marginBottom: 4,
-  },
-  textInputContainer: {
-    flexDirection: "row",
-    marginVertical: 8,
-  },
-  loginTextInput: {
-    flex: 1,
+  signupBt: {
+    justifyContent: "center",
+    alignItems: "center",
     height: 50,
-    borderColor: "rgb(215, 215, 215)",
-    borderWidth: 1,
-    paddingHorizontal: 16,
+    backgroundColor: "rgb(0, 175, 175)",
+  },
+  signupBtText: {
+    color: "rgb(255, 255, 255)",
+    fontSize: 18,
   },
 })
 

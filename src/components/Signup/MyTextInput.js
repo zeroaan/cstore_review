@@ -1,4 +1,4 @@
-import React, { Children, useState } from "react"
+import React, { useState } from "react"
 import { View, Text, StyleSheet, TextInput } from "react-native"
 
 const MyTextInput = ({ label, placeholder, children, ...props }) => {
