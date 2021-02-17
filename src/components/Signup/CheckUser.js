@@ -1,27 +1,27 @@
 import React from "react"
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
+import { Text, TouchableOpacity } from "react-native"
+import styled from "styled-components"
 
-const MyTextInput = ({ ...props }) => {
+const TouchableOpacityStyled = styled(TouchableOpacity)`
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) =>
+    props.disabled ? "rgb(200,200,200)" : "rgb(0, 175, 175)"};
+  padding: 0px 10px;
+`
+const TextStyled = styled(Text)`
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+`
+
+const MyTextInput = ({ disabled }) => {
   return (
     <>
-      <TouchableOpacity style={styles.checkBt} activeOpacity={0.7} {...props}>
-        <Text style={styles.checkBtText}>중복확인</Text>
-      </TouchableOpacity>
+      <TouchableOpacityStyled activeOpacity={0.7} disabled={disabled}>
+        <TextStyled>중복확인</TextStyled>
+      </TouchableOpacityStyled>
     </>
   )
 }
-
-const styles = StyleSheet.create({
-  checkBt: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgb(0, 175, 175)",
-    paddingHorizontal: 10,
-  },
-  checkBtText: {
-    color: "rgb(255, 255, 255)",
-    fontSize: 14,
-  },
-})
 
 export default MyTextInput

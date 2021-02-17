@@ -4,8 +4,7 @@ import { useHistory } from "react-router-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
 import LayoutGoBack from "~/components/LayoutGoBack"
-import MyTextInput from "~/components/Signup/MyTextInput"
-import CheckUser from "~/components/Signup/CheckUser"
+import SignupInput from "~/components/Signup/SignupInput"
 
 const Signup = () => {
   const history = useHistory()
@@ -23,20 +22,7 @@ const Signup = () => {
         <Text style={styles.topText}>회원가입</Text>
       </View>
 
-      <View style={styles.container}>
-        <MyTextInput label="이메일" placeholder="이메일 주소를 입력해주세요">
-          <CheckUser />
-        </MyTextInput>
-        <MyTextInput label="닉네임" placeholder="닉네임을 입력해주세요">
-          <CheckUser />
-        </MyTextInput>
-        <MyTextInput label="비밀번호" placeholder="비밀번호 (8자 이상)" />
-        <MyTextInput
-          label="비밀번호 확인"
-          placeholder="비밀번호를 다시 입력해주세요"
-          returnKeyType="done"
-        />
-      </View>
+      <SignupInput />
 
       <TouchableOpacity style={styles.signupBt} activeOpacity={0.7}>
         <Text style={styles.signupBtText}>완료</Text>
@@ -62,12 +48,6 @@ const styles = StyleSheet.create({
     left: 16,
   },
 
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    backgroundColor: "rgb(255,255,255)",
-    marginHorizontal: 20,
-  },
   signupBt: {
     justifyContent: "center",
     alignItems: "center",
