@@ -27,17 +27,15 @@ const Signup = () => {
         <MyTextInput label="이메일" placeholder="이메일 주소를 입력해주세요">
           <CheckUser />
         </MyTextInput>
+        <MyTextInput label="닉네임" placeholder="닉네임을 입력해주세요">
+          <CheckUser />
+        </MyTextInput>
         <MyTextInput label="비밀번호" placeholder="비밀번호 (8자 이상)" />
         <MyTextInput
           label="비밀번호 확인"
           placeholder="비밀번호를 다시 입력해주세요"
+          returnKeyType="done"
         />
-        <MyTextInput
-          label="닉네임"
-          placeholder="닉네임을 입력해주세요"
-          returnKeyType="done">
-          <CheckUser />
-        </MyTextInput>
       </View>
 
       <TouchableOpacity style={styles.signupBt} activeOpacity={0.7}>
