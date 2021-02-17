@@ -1,6 +1,14 @@
-import React, { useState } from "react"
-import { View, Text, StyleSheet, TextInput, ToastAndroid } from "react-native"
+import React, { useState, useRef } from "react"
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  ToastAndroid,
+} from "react-native"
 import { gql, useQuery } from "@apollo/client"
+import styled from "styled-components"
 
 import CheckUser from "~/components/Signup/CheckUser"
 
@@ -16,16 +24,20 @@ const CHECK_NAME = gql`
 `
 
 const SignupInput = () => {
-  const [inputEmail, setInputEmail] = useState("")
-  const [inputName, setInputName] = useState("")
-  const [inputPW, setInputPW] = useState("")
-  const [inputRePW, setInputRePW] = useState("")
+  const [inputEmail, setInputEmail] = useState({ text: "", check: false })
+  const [inputName, setInputName] = useState({ text: "", check: false })
+  const [inputPW, setInputPW] = useState({ text: "", check: false })
+  const [inputRePW, setInputRePW] = useState({ text: "", check: false })
+  const emailRef = useRef(null)
+  const nameRef = useRef(null)
+  const pwRef = useRef(null)
+  const rePwRef = useRef(null)
 
   const queryEmail = useQuery(CHECK_EMAIL, {
-    variables: { email: inputEmail },
+    variables: { email: inputEmail.text },
   })
   const queryName = useQuery(CHECK_NAME, {
-    variables: { username: inputName },
+    variables: { username: inputName.text },
   })
 
   const showToast = (text) => {
@@ -33,33 +45,83 @@ const SignupInput = () => {
   }
 
   const onPressCheckEmail = () => {
-    if (!inputEmail) return
-    if (!inputEmail.includes("@")) {
+    if (inputEmail.text.length < 6 || !inputEmail.text.includes("@")) {
       showToast("올바른 이메일 형식이 아닙니다")
-      return
+      return false
     }
     const { checkEmail } = queryEmail.data
-    checkEmail
-      ? showToast("사용 가능한 이메일입니다")
-      : showToast("이미 가입된 이메일입니다")
+    if (checkEmail) {
+      showToast("사용 가능한 이메일입니다")
+      nameRef?.current?.focus()
+      setInputEmail({ ...inputEmail, check: true })
+      return true
+    } else {
+      showToast("이미 가입된 이메일입니다")
+      return false
+    }
   }
   const onPressCheckName = () => {
-    if (!inputName) return
+    if (inputName.length < 3) {
+      showToast("닉네임이 너무 짧습니다")
+      return false
+    }
     const { checkUsername } = queryName.data
-    checkUsername
-      ? showToast("사용 가능한 닉네임입니다")
-      : showToast("이미 사용 중인 닉네임입니다")
+    if (checkUsername) {
+      showToast("사용 가능한 닉네임입니다")
+      pwRef?.current?.focus()
+      setInputName({ ...inputName, check: true })
+      return true
+    } else {
+      showToast("이미 사용 중인 닉네임입니다")
+      return false
+    }
+  }
+  const onSubmitPW = () => {
+    if (inputPW.length < 6) {
+      showToast("최소 6자리 이상 입력해주세요")
+      return false
+    } else {
+      rePwRef?.current?.focus()
+      setInputPW({ ...inputPW, check: true })
+      return true
+    }
+  }
+  const checkPassword = () => {
+    if (inputPW.text === inputRePW.text) {
+      setInputRePW({ ...inputRePW, check: true })
+      return true
+    }
+    return false
   }
 
+  const onSubmitSignup = () => {
+    if (!inputEmail.check) {
+      showToast("이메일을 다시 입력해주세요")
+      return false
+    } else if (!inputName.check) {
+      showToast("닉네임을 다시 입력해주세요")
+      return false
+    } else if (!inputPW.check) {
+      showToast("비밀번호를 다시 입력해주세요")
+      return false
+    } else if (!inputRePW.check) {
+      showToast("비밀번호가 같지 않습니다.")
+      return false
+    } else {
+      console.log("성공")
+    }
+  }
+  console.log(inputEmail.check, inputName.check, inputPW.check, inputRePW.check)
   return (
     <>
       <View style={styles.container}>
         <Text style={styles.labelText}>이메일</Text>
         <View style={styles.textInputContainer}>
           <TextInput
+            ref={emailRef}
             style={styles.loginTextInput}
-            value={inputEmail}
-            onChangeText={(v) => setInputEmail(v)}
+            value={inputEmail.text}
+            onChangeText={(v) => setInputEmail({ text: v, check: false })}
             placeholder="이메일 주소를 입력해주세요"
             autoCapitalize="none"
             returnKeyType="next"
@@ -75,9 +137,10 @@ const SignupInput = () => {
         <Text style={styles.labelText}>닉네임</Text>
         <View style={styles.textInputContainer}>
           <TextInput
+            ref={nameRef}
             style={styles.loginTextInput}
-            value={inputName}
-            onChangeText={(v) => setInputName(v)}
+            value={inputName.text}
+            onChangeText={(v) => setInputName({ text: v, check: false })}
             placeholder="닉네임을 입력해주세요"
             autoCapitalize="none"
             returnKeyType="next"
@@ -92,30 +155,47 @@ const SignupInput = () => {
         <Text style={styles.labelText}>비밀번호</Text>
         <View style={styles.textInputContainer}>
           <TextInput
+            ref={pwRef}
             style={styles.loginTextInput}
-            value={inputPW}
-            onChangeText={(v) => setInputPW(v)}
-            placeholder="비밀번호 (8자 이상)"
+            value={inputPW.text}
+            onChangeText={(v) => setInputPW({ text: v, check: false })}
+            placeholder="비밀번호 (6자 이상)"
             autoCapitalize="none"
             returnKeyType="next"
             maxLength={30}
             secureTextEntry={true}
+            onSubmitEditing={onSubmitPW}
+            onBlur={onSubmitPW}
           />
         </View>
 
         <Text style={styles.labelText}>비밀번호 확인</Text>
         <View style={styles.textInputContainer}>
           <TextInput
+            ref={rePwRef}
             style={styles.loginTextInput}
-            value={inputRePW}
-            onChangeText={(v) => setInputRePW(v)}
+            value={inputRePW.text}
+            onChangeText={(v) => setInputRePW({ text: v, check: false })}
             placeholder="비밀번호를 다시 입력해주세요"
             autoCapitalize="none"
             maxLength={30}
             secureTextEntry={true}
+            onBlur={checkPassword}
           />
         </View>
       </View>
+
+      <TouchableOpacityStyled
+        activeOpacity={0.7}
+        onPress={onSubmitSignup}
+        disabled={
+          !inputEmail.check ||
+          !inputName.check ||
+          !inputPW.check ||
+          !inputRePW.check
+        }>
+        <Text style={styles.signupBtText}>완료</Text>
+      </TouchableOpacityStyled>
     </>
   )
 }
@@ -143,6 +223,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 16,
   },
+
+  signupBtText: {
+    color: "rgb(255, 255, 255)",
+    fontSize: 18,
+  },
 })
+
+const TouchableOpacityStyled = styled(TouchableOpacity)`
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  background-color: ${(props) =>
+    props.disabled ? "rgb(200,200,200)" : "rgb(0, 175, 175)"};
+`
 
 export default SignupInput

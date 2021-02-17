@@ -1,5 +1,5 @@
 import React from "react"
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
+import { View, Text, StyleSheet } from "react-native"
 import { useHistory } from "react-router-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
@@ -23,10 +23,6 @@ const Signup = () => {
       </View>
 
       <SignupInput />
-
-      <TouchableOpacity style={styles.signupBt} activeOpacity={0.7}>
-        <Text style={styles.signupBtText}>완료</Text>
-      </TouchableOpacity>
     </LayoutGoBack>
   )
 }
@@ -46,17 +42,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 16,
     left: 16,
-  },
-
-  signupBt: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: 50,
-    backgroundColor: "rgb(0, 175, 175)",
-  },
-  signupBtText: {
-    color: "rgb(255, 255, 255)",
-    fontSize: 18,
   },
 })
 
