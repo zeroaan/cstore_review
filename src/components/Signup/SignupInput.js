@@ -1,9 +1,14 @@
 import React, { useState } from "react"
-import { View, Text, StyleSheet, TextInput } from "react-native"
+import { View, Text, StyleSheet, TextInput, ToastAndroid } from "react-native"
 import { gql, useQuery } from "@apollo/client"
 
 import CheckUser from "~/components/Signup/CheckUser"
 
+const CHECK_EMAIL = gql`
+  query checkEmail($email: String!) {
+    checkEmail(email: $email)
+  }
+`
 const CHECK_NAME = gql`
   query checkUsername($username: String!) {
     checkUsername(username: $username)
@@ -16,12 +21,34 @@ const SignupInput = () => {
   const [inputPW, setInputPW] = useState("")
   const [inputRePW, setInputRePW] = useState("")
 
-  const checkName = useQuery(CHECK_NAME, {
+  const queryEmail = useQuery(CHECK_EMAIL, {
+    variables: { email: inputEmail },
+  })
+  const queryName = useQuery(CHECK_NAME, {
     variables: { username: inputName },
   })
 
+  const showToast = (text) => {
+    ToastAndroid.show(text, ToastAndroid.SHORT)
+  }
+
+  const onPressCheckEmail = () => {
+    if (!inputEmail) return
+    if (!inputEmail.includes("@")) {
+      showToast("올바른 이메일 형식이 아닙니다")
+      return
+    }
+    const { checkEmail } = queryEmail.data
+    checkEmail
+      ? showToast("사용 가능한 이메일입니다")
+      : showToast("이미 가입된 이메일입니다")
+  }
   const onPressCheckName = () => {
-    console.log(checkName.data)
+    if (!inputName) return
+    const { checkUsername } = queryName.data
+    checkUsername
+      ? showToast("사용 가능한 닉네임입니다")
+      : showToast("이미 사용 중인 닉네임입니다")
   }
 
   return (
@@ -37,8 +64,12 @@ const SignupInput = () => {
             autoCapitalize="none"
             returnKeyType="next"
             maxLength={30}
+            keyboardType="email-address"
           />
-          <CheckUser />
+          <CheckUser
+            onPress={onPressCheckEmail}
+            disabled={queryEmail.loading && true}
+          />
         </View>
 
         <Text style={styles.labelText}>닉네임</Text>
@@ -54,7 +85,7 @@ const SignupInput = () => {
           />
           <CheckUser
             onPress={onPressCheckName}
-            disabled={checkName.loading && true}
+            disabled={queryName.loading && true}
           />
         </View>
 
@@ -68,6 +99,7 @@ const SignupInput = () => {
             autoCapitalize="none"
             returnKeyType="next"
             maxLength={30}
+            secureTextEntry={true}
           />
         </View>
 
@@ -80,6 +112,7 @@ const SignupInput = () => {
             placeholder="비밀번호를 다시 입력해주세요"
             autoCapitalize="none"
             maxLength={30}
+            secureTextEntry={true}
           />
         </View>
       </View>

@@ -42,6 +42,7 @@ const Login = () => {
             returnKeyType="next"
             autoCapitalize="none"
             maxLength={30}
+            keyboardType="email-address"
           />
         </View>
         <View style={styles.textInputContainer}>
@@ -53,6 +54,7 @@ const Login = () => {
             placeholder="비밀번호 입력"
             autoCapitalize="none"
             maxLength={30}
+            secureTextEntry={true}
           />
         </View>
         <View style={styles.buttonContainer}>

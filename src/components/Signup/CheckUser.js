@@ -14,10 +14,13 @@ const TextStyled = styled(Text)`
   font-size: 14px;
 `
 
-const MyTextInput = ({ disabled }) => {
+const MyTextInput = ({ disabled, ...props }) => {
   return (
     <>
-      <TouchableOpacityStyled activeOpacity={0.7} disabled={disabled}>
+      <TouchableOpacityStyled
+        activeOpacity={0.7}
+        disabled={disabled}
+        {...props}>
         <TextStyled>중복확인</TextStyled>
       </TouchableOpacityStyled>
     </>
