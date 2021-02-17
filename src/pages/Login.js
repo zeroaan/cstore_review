@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useRef } from "react"
 import {
   View,
   Text,
   StyleSheet,
-  BackHandler,
   TextInput,
   TouchableOpacity,
 } from "react-native"
 import { useHistory } from "react-router-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
+
+import LayoutGoBack from "~/components/LayoutGoBack"
 
 const Login = () => {
   const history = useHistory()
@@ -16,19 +17,8 @@ const Login = () => {
   const [inputPassword, setInputPassword] = useState("")
   const pwRef = useRef(null)
 
-  const backAction = () => {
-    history.goBack()
-    return true
-  }
-
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", backAction)
-    return () =>
-      BackHandler.removeEventListener("hardwareBackPress", backAction)
-  }, [])
-
   return (
-    <>
+    <LayoutGoBack>
       <View style={styles.container}>
         <Icon
           style={styles.closeIcon}
@@ -80,7 +70,7 @@ const Login = () => {
           </TouchableOpacity>
         </View>
       </View>
-    </>
+    </LayoutGoBack>
   )
 }
 

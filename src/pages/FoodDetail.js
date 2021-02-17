@@ -1,38 +1,21 @@
-import React, { useEffect } from "react"
-import {
-  View,
-  ScrollView,
-  Text,
-  Image,
-  StyleSheet,
-  BackHandler,
-} from "react-native"
-import { useHistory, useLocation } from "react-router-native"
+import React from "react"
+import { View, ScrollView, Text, Image, StyleSheet } from "react-native"
+import { useLocation } from "react-router-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
 import FoodDetailTop from "~/components/FoodDetail/FoodDetailTop"
 import FoodReviewBt from "~/components/FoodDetail/FoodReviewBt"
 import FoodReview from "~/components/FoodDetail/FoodReview"
 
+import LayoutGoBack from "~/components/LayoutGoBack"
+
 const FoodDetail = () => {
-  const history = useHistory()
   const {
     state: { food, star },
   } = useLocation()
 
-  const backAction = () => {
-    history.goBack()
-    return true
-  }
-
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", backAction)
-    return () =>
-      BackHandler.removeEventListener("hardwareBackPress", backAction)
-  }, [])
-
   return (
-    <>
+    <LayoutGoBack>
       <FoodDetailTop />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <View style={styles.imageContainer}>
@@ -53,7 +36,7 @@ const FoodDetail = () => {
         <FoodReviewBt />
         <FoodReview review={food.review} />
       </ScrollView>
-    </>
+    </LayoutGoBack>
   )
 }
 
