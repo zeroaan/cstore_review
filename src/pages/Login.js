@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   },
   loginText: {
     fontFamily: "DoHyeon",
-    fontSize: 30,
+    fontSize: 40,
     color: "rgb(50, 50, 50)",
     marginBottom: 20,
   },
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   },
   loginTextInput: {
     flex: 1,
-    height: 40,
+    height: 50,
     borderColor: "rgb(215, 215, 215)",
     borderWidth: 1,
     paddingHorizontal: 16,
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   },
   signupBt: {
     flex: 1,
-    height: 40,
+    height: 50,
     backgroundColor: "rgb(255, 255, 255)",
     borderColor: "rgb(0, 175, 175)",
     borderWidth: 1,
@@ -135,12 +135,12 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   signupBtText: {
-    fontSize: 16,
+    fontSize: 18,
     color: "rgb(0 , 175, 175)",
   },
   loginBt: {
     flex: 1,
-    height: 40,
+    height: 50,
     backgroundColor: "rgb(0, 175, 175)",
     flexDirection: "row",
     justifyContent: "center",
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   loginBtText: {
-    fontSize: 16,
+    fontSize: 18,
     color: "rgb(255,255,255)",
   },
 })
