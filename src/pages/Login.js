@@ -1,10 +1,11 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import {
   View,
   Text,
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ToastAndroid,
 } from "react-native"
 import { useHistory } from "react-router-native"
 import { useDispatch } from "react-redux"
@@ -38,11 +39,21 @@ const Login = () => {
     variables: { email: inputEmail, password: inputPassword },
   })
 
-  const onPressLoginBt = () => {
+  useEffect(() => {
     loginQuery()
-    if (data) {
+  }, [inputPassword])
+
+  const onPressLoginBt = () => {
+    if (data && data.login) {
       dispatch(login(data.login))
       history.push("/")
+    } else {
+      ToastAndroid.show(
+        "가입되지 않은 아이디이거나,\n잘못된 비밀번호입니다.",
+        ToastAndroid.SHORT,
+      )
+      setInputEmail("")
+      setInputPassword("")
     }
   }
 
