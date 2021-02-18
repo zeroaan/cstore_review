@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   topContainer: {
-    flex: 1,
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "rgb(255,255,255)",
@@ -71,7 +70,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   profile: {
-    flex: 1,
     flexDirection: "row",
     width: "90%",
   },
