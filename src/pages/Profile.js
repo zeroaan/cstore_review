@@ -2,6 +2,7 @@ import React from "react"
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { useHistory } from "react-router-native"
 import { useDispatch, useSelector } from "react-redux"
+import Icon from "react-native-vector-icons/MaterialIcons"
 
 import { logout } from "~/store/actions/user"
 
@@ -23,6 +24,13 @@ const Profile = () => {
         {user ? (
           <View style={styles.topContainer}>
             <Text style={styles.topText}>마이페이지</Text>
+            <View style={styles.profile}>
+              <Icon name="person" color="rgb(0,175,175)" size={100} />
+              <View style={styles.profileText}>
+                <Text style={styles.profileName}>{user.username}</Text>
+                <Text style={styles.profileEmail}>{user.email}</Text>
+              </View>
+            </View>
             <TouchableOpacity
               style={styles.logoutBt}
               activeOpacity={0.7}
@@ -51,16 +59,33 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   topContainer: {
-    justifyContent: "center",
+    flex: 1,
+    justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "rgb(255,255,255)",
-    marginBottom: 8,
     paddingVertical: 18,
   },
   topText: {
     fontSize: 18,
     fontWeight: "bold",
+    marginBottom: 20,
   },
+  profile: {
+    flex: 1,
+    flexDirection: "row",
+    width: "90%",
+  },
+  profileText: {
+    marginTop: 30,
+  },
+  profileName: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  profileEmail: {
+    fontSize: 14,
+  },
+
   logoutBt: {
     width: 200,
     height: 40,
@@ -69,7 +94,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 8,
+    marginTop: 30,
   },
   logoutBtText: {
     fontSize: 16,
