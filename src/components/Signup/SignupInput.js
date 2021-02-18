@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   ToastAndroid,
+  Alert,
 } from "react-native"
 import { gql, useQuery } from "@apollo/client"
 import styled from "styled-components"
@@ -77,7 +78,7 @@ const SignupInput = () => {
     }
   }
   const onSubmitPW = () => {
-    if (inputPW.length < 6) {
+    if (inputPW.text.length < 6) {
       showToast("최소 6자리 이상 입력해주세요")
       return false
     } else {
@@ -91,27 +92,47 @@ const SignupInput = () => {
       setInputRePW({ ...inputRePW, check: true })
       return true
     }
+    showToast("비밀번호가 맞지 않습니다")
     return false
   }
 
   const onSubmitSignup = () => {
+    checkPassword()
     if (!inputEmail.check) {
       showToast("이메일을 다시 입력해주세요")
-      return false
     } else if (!inputName.check) {
       showToast("닉네임을 다시 입력해주세요")
-      return false
     } else if (!inputPW.check) {
       showToast("비밀번호를 다시 입력해주세요")
-      return false
     } else if (!inputRePW.check) {
-      showToast("비밀번호가 같지 않습니다.")
-      return false
+      checkSignup()
     } else {
-      console.log("성공")
+      checkSignup()
     }
   }
-  console.log(inputEmail.check, inputName.check, inputPW.check, inputRePW.check)
+  const checkSignup = () => {
+    Alert.alert(
+      `가입 정보 확인`,
+      `이메일 : ${inputEmail.text}\n닉네임 : ${inputName.text}`,
+      [
+        {
+          text: "취소",
+          onPress: () => {
+            setInputEmail({ ...inputEmail, check: false })
+            setInputName({ ...inputName, check: false })
+          },
+        },
+        {
+          text: "확인",
+          onPress: () => {
+            if (!checkPassword()) return null
+            console.log("성공")
+          },
+        },
+      ],
+    )
+  }
+
   return (
     <>
       <View style={styles.container}>
@@ -127,9 +148,11 @@ const SignupInput = () => {
             returnKeyType="next"
             maxLength={30}
             keyboardType="email-address"
+            editable={!inputEmail.check}
           />
           <CheckUser
             onPress={onPressCheckEmail}
+            checked={inputEmail.check}
             disabled={queryEmail.loading && true}
           />
         </View>
@@ -145,9 +168,11 @@ const SignupInput = () => {
             autoCapitalize="none"
             returnKeyType="next"
             maxLength={30}
+            editable={!inputName.check}
           />
           <CheckUser
             onPress={onPressCheckName}
+            checked={inputName.check}
             disabled={queryName.loading && true}
           />
         </View>
@@ -164,7 +189,6 @@ const SignupInput = () => {
             returnKeyType="next"
             maxLength={30}
             secureTextEntry={true}
-            onSubmitEditing={onSubmitPW}
             onBlur={onSubmitPW}
           />
         </View>
@@ -185,17 +209,12 @@ const SignupInput = () => {
         </View>
       </View>
 
-      <TouchableOpacityStyled
+      <TouchableOpacity
+        style={styles.signupBt}
         activeOpacity={0.7}
-        onPress={onSubmitSignup}
-        disabled={
-          !inputEmail.check ||
-          !inputName.check ||
-          !inputPW.check ||
-          !inputRePW.check
-        }>
+        onPress={onSubmitSignup}>
         <Text style={styles.signupBtText}>완료</Text>
-      </TouchableOpacityStyled>
+      </TouchableOpacity>
     </>
   )
 }
@@ -224,6 +243,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 
+  signupBt: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: 50,
+    backgroundColor: "rgb(0, 175, 175)",
+  },
   signupBtText: {
     color: "rgb(255, 255, 255)",
     fontSize: 18,
