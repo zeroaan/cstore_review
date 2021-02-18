@@ -1,16 +1,15 @@
-import React, { useContext } from "react"
+import React from "react"
 import { View, Text, StyleSheet, Alert } from "react-native"
 import { useHistory } from "react-router-native"
+import { useSelector } from "react-redux"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
-import { DataContext } from "~/context"
-
 const FoodDetailTop = () => {
-  const { users } = useContext(DataContext)
   const history = useHistory()
+  const { user } = useSelector((state) => state.user)
 
   const onPressLikeBt = () => {
-    if (users) {
+    if (user) {
       return
     }
     Alert.alert("", "로그인 후 이용 가능합니다.", [

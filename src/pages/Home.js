@@ -1,36 +1,20 @@
-import React, { useContext } from "react"
+import React from "react"
 import { StyleSheet, View, ScrollView, Text } from "react-native"
-
-import { DataContext } from "~/context"
+import { useSelector } from "react-redux"
 
 import Layout from "~/components/Layout"
 import HomeTop from "~/components/Home/HomeTop"
 import FoodSimple from "~/components/Home/FoodSimple"
 
 const Home = () => {
-  const { foods } = useContext(DataContext)
+  const { bestStarFoods, bestLikedFoods, bestReviewFoods } = useSelector(
+    (state) => state.food,
+  )
 
-  const bestStarData = [...foods].sort(function (a, b) {
-    let sumA = 0,
-      sumB = 0,
-      resultA,
-      resultB
-    a.review.map((v) => (sumA += v.star))
-    b.review.map((v) => (sumB += v.star))
-    a.review.length === 0 ? (resultA = 0) : (resultA = sumA / a.review.length)
-    b.review.length === 0 ? (resultB = 0) : (resultB = sumB / b.review.length)
-    return resultB - resultA
-  })
-  const bestLikedData = [...foods].sort(function (a, b) {
-    return b.liked - a.liked
-  })
-  const bestReviewData = [...foods].sort(function (a, b) {
-    return b.review.length - a.review.length
-  })
   const FoodData = [
-    { id: 0, title: "Best 상품", data: bestStarData },
-    { id: 1, title: "좋아요 많은 상품", data: bestLikedData },
-    { id: 2, title: "리뷰 많은 상품", data: bestReviewData },
+    { id: 0, title: "Best 상품", data: bestStarFoods },
+    { id: 1, title: "좋아요 많은 상품", data: bestLikedFoods },
+    { id: 2, title: "리뷰 많은 상품", data: bestReviewFoods },
   ]
 
   return (

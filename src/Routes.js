@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { NativeRouter, Switch, Route } from "react-router-native"
+import { useDispatch } from "react-redux"
 import { gql, useQuery } from "@apollo/client"
 
-import { DataContext } from "~/context"
+import { addFood } from "~/store/actions/food"
 
 import Loading from "~/components/Loading"
 import Home from "~/pages/Home"
@@ -35,26 +36,29 @@ const GET_FOODS = gql`
 `
 
 const Routes = () => {
+  const dispatch = useDispatch()
+
   const { loading, data } = useQuery(GET_FOODS)
+
+  useEffect(() => {
+    data && dispatch(addFood(data.foods))
+  }, [loading])
 
   if (loading) {
     return <Loading />
   }
-
   return (
-    <DataContext.Provider value={data}>
-      <NativeRouter>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/search" component={Search} />
-          <Route path="/foodlist" component={FoodList} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/login" component={Login} />
-          <Route path="/Signup" component={Signup} />
-          <Route path="/food/:foodId" component={FoodDetail} />
-        </Switch>
-      </NativeRouter>
-    </DataContext.Provider>
+    <NativeRouter>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/search" component={Search} />
+        <Route path="/foodlist" component={FoodList} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/login" component={Login} />
+        <Route path="/Signup" component={Signup} />
+        <Route path="/food/:foodId" component={FoodDetail} />
+      </Switch>
+    </NativeRouter>
   )
 }
 

@@ -1,19 +1,18 @@
-import React, { useContext } from "react"
+import React from "react"
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { useHistory } from "react-router-native"
-
-import { DataContext } from "~/context"
+import { useSelector } from "react-redux"
 
 import Layout from "~/components/Layout"
 
 const Profile = () => {
-  const { users } = useContext(DataContext)
   const history = useHistory()
+  const { user } = useSelector((state) => state.user)
 
   return (
     <Layout>
       <View style={styles.container}>
-        {users ? (
+        {user ? (
           <View style={styles.topContainer}>
             <Text style={styles.topText}>마이페이지</Text>
           </View>

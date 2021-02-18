@@ -8,7 +8,8 @@ import {
   ToastAndroid,
   Alert,
 } from "react-native"
-import { gql, useQuery } from "@apollo/client"
+import { useHistory } from "react-router-native"
+import { gql, useQuery, useMutation } from "@apollo/client"
 import styled from "styled-components"
 
 import CheckUser from "~/components/Signup/CheckUser"
@@ -23,8 +24,14 @@ const CHECK_NAME = gql`
     checkUsername(username: $username)
   }
 `
+const SIGN_UP = gql`
+  mutation signup($username: String!, $email: String!, $password: String!) {
+    signup(username: $username, email: $email, password: $password)
+  }
+`
 
 const SignupInput = () => {
+  const history = useHistory()
   const [inputEmail, setInputEmail] = useState({ text: "", check: false })
   const [inputName, setInputName] = useState({ text: "", check: false })
   const [inputPW, setInputPW] = useState({ text: "", check: false })
@@ -39,6 +46,13 @@ const SignupInput = () => {
   })
   const queryName = useQuery(CHECK_NAME, {
     variables: { username: inputName.text },
+  })
+  const [signUp] = useMutation(SIGN_UP, {
+    variables: {
+      username: inputName.text,
+      email: inputEmail.text,
+      password: inputPW.text,
+    },
   })
 
   const showToast = (text) => {
@@ -126,7 +140,9 @@ const SignupInput = () => {
           text: "확인",
           onPress: () => {
             if (!checkPassword()) return null
-            console.log("성공")
+            showToast("회원가입 완료")
+            signUp()
+            history.push("/login")
           },
         },
       ],
