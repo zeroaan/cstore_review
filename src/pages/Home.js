@@ -2,12 +2,13 @@ import React from "react"
 import { StyleSheet, View, ScrollView, Text } from "react-native"
 import { useSelector } from "react-redux"
 
+import Loading from "~/components/Loading"
 import Layout from "~/components/Layout"
 import HomeTop from "~/components/Home/HomeTop"
 import FoodSimple from "~/components/Home/FoodSimple"
 
 const Home = () => {
-  const { bestStarFoods, bestLikedFoods, bestReviewFoods } = useSelector(
+  const { foods, bestStarFoods, bestLikedFoods, bestReviewFoods } = useSelector(
     (state) => state.food,
   )
 
@@ -17,6 +18,9 @@ const Home = () => {
     { id: 2, title: "리뷰 많은 상품", data: bestReviewFoods },
   ]
 
+  if (!foods) {
+    return <Loading />
+  }
   return (
     <Layout>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>

@@ -7,8 +7,11 @@ import {
   TouchableOpacity,
 } from "react-native"
 import { useHistory } from "react-router-native"
+import { useDispatch } from "react-redux"
 import { gql, useLazyQuery } from "@apollo/client"
 import Icon from "react-native-vector-icons/MaterialIcons"
+
+import { login } from "~/store/actions/user"
 
 import LayoutGoBack from "~/components/LayoutGoBack"
 
@@ -26,14 +29,22 @@ const LOGIN = gql`
 
 const Login = () => {
   const history = useHistory()
+  const dispatch = useDispatch()
   const [inputEmail, setInputEmail] = useState("")
   const [inputPassword, setInputPassword] = useState("")
+  const pwRef = useRef(null)
 
   const [loginQuery, { data }] = useLazyQuery(LOGIN, {
     variables: { email: inputEmail, password: inputPassword },
   })
 
-  const pwRef = useRef(null)
+  const onPressLoginBt = () => {
+    loginQuery()
+    if (data) {
+      dispatch(login(data.login))
+      history.push("/")
+    }
+  }
 
   return (
     <LayoutGoBack>
@@ -85,9 +96,7 @@ const Login = () => {
           <TouchableOpacity
             style={styles.loginBt}
             activeOpacity={0.7}
-            onPress={() => {
-              loginQuery()
-            }}>
+            onPress={onPressLoginBt}>
             <Text style={styles.loginBtText}>로그인</Text>
           </TouchableOpacity>
         </View>

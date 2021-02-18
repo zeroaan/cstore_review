@@ -1,13 +1,21 @@
 import React from "react"
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { useHistory } from "react-router-native"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+
+import { logout } from "~/store/actions/user"
 
 import Layout from "~/components/Layout"
 
 const Profile = () => {
   const history = useHistory()
+  const dispatch = useDispatch()
   const { user } = useSelector((state) => state.user)
+
+  const onPressLogout = () => {
+    dispatch(logout())
+    history.push("/")
+  }
 
   return (
     <Layout>
@@ -15,6 +23,12 @@ const Profile = () => {
         {user ? (
           <View style={styles.topContainer}>
             <Text style={styles.topText}>마이페이지</Text>
+            <TouchableOpacity
+              style={styles.logoutBt}
+              activeOpacity={0.7}
+              onPress={onPressLogout}>
+              <Text style={styles.logoutBtText}>로그아웃</Text>
+            </TouchableOpacity>
           </View>
         ) : (
           <View style={styles.beforeLoginContainer}>
@@ -46,6 +60,20 @@ const styles = StyleSheet.create({
   topText: {
     fontSize: 18,
     fontWeight: "bold",
+  },
+  logoutBt: {
+    width: 200,
+    height: 40,
+    backgroundColor: "rgb(0, 175, 175)",
+    borderRadius: 50,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 8,
+  },
+  logoutBtText: {
+    fontSize: 16,
+    color: "rgb(255,255,255)",
   },
 
   beforeLoginContainer: {

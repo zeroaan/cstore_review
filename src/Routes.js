@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect } from "react"
 import { NativeRouter, Switch, Route } from "react-router-native"
 import { useDispatch } from "react-redux"
 import { gql, useQuery } from "@apollo/client"

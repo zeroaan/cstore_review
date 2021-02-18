@@ -1,7 +1,7 @@
 import * as types from "../actions/types"
 
 const initialState = {
-  foods: [],
+  foods: null,
 }
 
 const foodReducer = (state = initialState, action) => {

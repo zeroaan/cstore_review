@@ -6,3 +6,8 @@ export const login = (data) => {
     data,
   }
 }
+export const logout = () => {
+  return {
+    type: types.LOGOUT,
+  }
+}
