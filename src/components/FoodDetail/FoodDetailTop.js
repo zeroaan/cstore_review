@@ -2,21 +2,35 @@ import React from "react"
 import { View, Text, StyleSheet, Alert } from "react-native"
 import { useHistory } from "react-router-native"
 import { useSelector } from "react-redux"
+import { gql, useMutation } from "@apollo/client"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
-const FoodDetailTop = () => {
+const LIKED_FOOD = gql`
+  mutation updateFoodLiked($_id: ID!, $liked: String!) {
+    updateFoodLiked(_id: $_id, liked: $liked) {
+      name
+    }
+  }
+`
+
+const FoodDetailTop = ({ food }) => {
   const history = useHistory()
   const { user } = useSelector((state) => state.user)
 
+  const [mutationLikedFood] = useMutation(LIKED_FOOD, {
+    variables: { _id: food._id, liked: user?._id },
+  })
+
   const onPressLikeBt = () => {
     if (user) {
-      return
+      mutationLikedFood()
+      return true
     }
     Alert.alert("", "로그인 후 이용 가능합니다.", [
       { text: "취소", onPress: () => null },
       { text: "로그인", onPress: () => history.push("/login") },
     ])
-    return true
+    return false
   }
 
   return (

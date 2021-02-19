@@ -16,7 +16,7 @@ const FoodDetail = () => {
 
   return (
     <LayoutGoBack>
-      <FoodDetailTop />
+      <FoodDetailTop food={food} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <View style={styles.imageContainer}>
           <Image style={styles.foodImage} source={{ uri: `${food.image}` }} />

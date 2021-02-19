@@ -12,6 +12,7 @@
   "dependencies": {
     "@apollo/client": "^3.3.7",
     "graphql": "^15.5.0",
+    "immer": "^8.0.1",
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-swiper": "^1.6.0",
