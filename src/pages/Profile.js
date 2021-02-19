@@ -1,5 +1,5 @@
 import React from "react"
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native"
 import { useHistory } from "react-router-native"
 import { useDispatch, useSelector } from "react-redux"
 import Icon from "react-native-vector-icons/MaterialIcons"
@@ -14,8 +14,10 @@ const Profile = () => {
   const { user } = useSelector((state) => state.user)
 
   const onPressLogout = () => {
-    dispatch(logout())
-    history.push("/")
+    Alert.alert("", "로그아웃 하시겠습니까?", [
+      { text: "취소", onPress: () => null },
+      { text: "확인", onPress: () => dispatch(logout()) },
+    ])
   }
 
   return (
