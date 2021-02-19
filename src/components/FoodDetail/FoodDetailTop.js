@@ -17,13 +17,13 @@ const FoodDetailTop = ({ food }) => {
   const history = useHistory()
   const { user } = useSelector((state) => state.user)
 
-  const [mutationLikedFood] = useMutation(LIKED_FOOD, {
+  const [likedFood] = useMutation(LIKED_FOOD, {
     variables: { _id: food._id, liked: user?._id },
   })
 
   const onPressLikeBt = () => {
     if (user) {
-      mutationLikedFood()
+      likedFood()
       return true
     }
     Alert.alert("", "로그인 후 이용 가능합니다.", [
@@ -45,7 +45,11 @@ const FoodDetailTop = ({ food }) => {
         <Text style={styles.topText}>제품정보</Text>
         <Icon
           name="favorite"
-          color="rgb(200,200,200)"
+          color={
+            food.liked.includes(user?._id)
+              ? "rgb(235, 61, 57)"
+              : "rgb(200,200,200)"
+          }
           size={25}
           onPress={onPressLikeBt}
         />
