@@ -44,15 +44,18 @@ const Login = () => {
   }, [inputPassword])
 
   const onPressLoginBt = () => {
-    if (data && data.login) {
+    if (!inputEmail) {
+      ToastAndroid.show("이메일을 입력해주세요.", ToastAndroid.SHORT)
+    } else if (!inputPassword) {
+      ToastAndroid.show("비밀번호를 입력해주세요.", ToastAndroid.SHORT)
+    } else if (data && data.login) {
       dispatch(login(data.login))
       history.push("/")
     } else {
       ToastAndroid.show(
-        "가입되지 않은 아이디이거나,\n잘못된 비밀번호입니다.",
+        "가입되지 않은 이메일이거나,\n잘못된 비밀번호입니다.",
         ToastAndroid.SHORT,
       )
-      setInputEmail("")
       setInputPassword("")
     }
   }
