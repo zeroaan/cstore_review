@@ -15,7 +15,8 @@ import Icon from "react-native-vector-icons/MaterialIcons"
 
 import { addFood } from "~/store/actions/food"
 
-import FoodReviewStar from "~/components/FoodReview/FoodReviewStar"
+import LayoutGoBack from "~/components/LayoutGoBack"
+import AddReviewStar from "~/components/AddReview/AddReviewStar"
 
 const REVIEW_FOOD = gql`
   mutation updateFoodReview(
@@ -54,7 +55,7 @@ const REVIEW_FOOD = gql`
   }
 `
 
-const FoodReview = () => {
+const AddReview = () => {
   const { foodId } = useParams()
 
   const history = useHistory()
@@ -100,7 +101,7 @@ const FoodReview = () => {
   }
 
   return (
-    <>
+    <LayoutGoBack>
       <View style={styles.container}>
         <Icon
           style={styles.closeIcon}
@@ -124,7 +125,7 @@ const FoodReview = () => {
           />
         </View>
 
-        <FoodReviewStar star={inputStar} setStar={setInputStar} />
+        <AddReviewStar star={inputStar} setStar={setInputStar} />
 
         <View style={styles.buttonContainer}>
           <TouchableOpacity
@@ -141,7 +142,7 @@ const FoodReview = () => {
           </TouchableOpacity>
         </View>
       </View>
-    </>
+    </LayoutGoBack>
   )
 }
 
@@ -209,4 +210,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default FoodReview
+export default AddReview

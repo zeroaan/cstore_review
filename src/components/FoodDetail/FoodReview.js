@@ -32,7 +32,12 @@ const FoodReview = ({ review }) => {
                 <Text style={styles.foodReviewUserName}>{v.username}</Text>
                 <Text style={styles.foodReviewDate}>{dateCount(v.date)}</Text>
               </View>
-              <Text style={styles.foodReviewStar}>⭐ {v.star}</Text>
+              <View style={styles.foodReviewStar}>
+                <Icon name="star" color="rgb(255, 204, 0)" size={20} />
+                <Text style={styles.foodReviewStarText}>
+                  {v.star.toFixed(1)}
+                </Text>
+              </View>
             </View>
             <Text style={styles.foodReviewPost}>{v.post}</Text>
           </View>
@@ -81,6 +86,11 @@ const styles = StyleSheet.create({
     color: "rgb(150,150,150)",
   },
   foodReviewStar: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  foodReviewStarText: {
+    marginLeft: 2,
     fontSize: 16,
     color: "rgb(254, 68, 80)",
   },

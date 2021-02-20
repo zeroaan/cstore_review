@@ -29,12 +29,14 @@ const FoodDetail = () => {
         </View>
         <View style={styles.foodMainContainer}>
           <Text style={styles.foodName}>{food.fullName}</Text>
-          <Text style={styles.foodStar}>
-            ⭐{" "}
-            {food.sumStar === 0
-              ? "0.0"
-              : (food.sumStar / food.review.length).toFixed(1)}
-          </Text>
+          <View style={styles.foodStar}>
+            <Icon name="star" color="rgb(255, 204, 0)" size={25} />
+            <Text style={styles.foodStarText}>
+              {food.sumStar === 0
+                ? "0.0"
+                : (food.sumStar / food.review.length).toFixed(1)}
+            </Text>
+          </View>
           <Text style={styles.foodPrice}>{food.price}원</Text>
         </View>
         <View style={styles.foodSubContainer}>
@@ -74,7 +76,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   foodStar: {
+    flexDirection: "row",
     marginVertical: 8,
+    alignItems: "center",
+  },
+  foodStarText: {
+    marginLeft: 4,
     color: "rgb(254, 68, 80)",
     fontSize: 21,
     fontWeight: "bold",

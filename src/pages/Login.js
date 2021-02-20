@@ -50,6 +50,7 @@ const Login = () => {
       ToastAndroid.show("비밀번호를 입력해주세요.", ToastAndroid.SHORT)
     } else if (data && data.login) {
       dispatch(login(data.login))
+      ToastAndroid.show("로그인 완료", ToastAndroid.SHORT)
       history.push("/")
     } else {
       ToastAndroid.show(
