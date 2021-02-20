@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { View, ScrollView, Text, Image, StyleSheet } from "react-native"
-import { useLocation } from "react-router-native"
+import { useLocation, useParams } from "react-router-native"
+import { useSelector } from "react-redux"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
 import FoodDetailTop from "~/components/FoodDetail/FoodDetailTop"
@@ -10,9 +11,14 @@ import FoodReview from "~/components/FoodDetail/FoodReview"
 import LayoutGoBack from "~/components/LayoutGoBack"
 
 const FoodDetail = () => {
-  const {
-    state: { food, star },
-  } = useLocation()
+  const { foodId } = useParams()
+
+  const { foods } = useSelector((state) => state.food)
+  const [food, setFood] = useState(foods.find((v) => v._id === foodId))
+
+  useEffect(() => {
+    setFood(foods.find((v) => v._id === foodId))
+  }, [foods])
 
   return (
     <LayoutGoBack>
@@ -23,7 +29,7 @@ const FoodDetail = () => {
         </View>
         <View style={styles.foodMainContainer}>
           <Text style={styles.foodName}>{food.fullName}</Text>
-          <Text style={styles.foodStar}>⭐ {star}</Text>
+          <Text style={styles.foodStar}>⭐ {"0.0"}</Text>
           <Text style={styles.foodPrice}>{food.price}원</Text>
         </View>
         <View style={styles.foodSubContainer}>

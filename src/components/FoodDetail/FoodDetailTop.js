@@ -1,25 +1,45 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { View, Text, StyleSheet, Alert } from "react-native"
 import { useHistory } from "react-router-native"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { gql, useMutation } from "@apollo/client"
 import Icon from "react-native-vector-icons/MaterialIcons"
+
+import { addFood } from "~/store/actions/food"
 
 const LIKED_FOOD = gql`
   mutation updateFoodLiked($_id: ID!, $liked: String!) {
     updateFoodLiked(_id: $_id, liked: $liked) {
+      _id
       name
+      fullName
+      price
+      image
+      liked
+      review {
+        _id
+        userid
+        username
+        date
+        post
+        star
+      }
     }
   }
 `
 
 const FoodDetailTop = ({ food }) => {
   const history = useHistory()
+  const dispatch = useDispatch()
   const { user } = useSelector((state) => state.user)
 
-  const [likedFood] = useMutation(LIKED_FOOD, {
+  const [likedFood, { data }] = useMutation(LIKED_FOOD, {
     variables: { _id: food._id, liked: user?._id },
   })
+
+  useEffect(() => {
+    data && dispatch(addFood(data.updateFoodLiked))
+  }, [data])
 
   const onPressLikeBt = () => {
     if (user) {
