@@ -11,6 +11,7 @@ import Search from "~/pages/Search"
 import FoodList from "~/pages/FoodList"
 import Profile from "~/pages/Profile"
 import FoodDetail from "~/pages/FoodDetail"
+import FoodReview from "~/pages/FoodReview"
 import Login from "~/pages/Login"
 import Signup from "~/pages/Signup"
 
@@ -23,6 +24,8 @@ const GET_FOODS = gql`
       price
       image
       liked
+      sumStar
+      category
       review {
         _id
         userid
@@ -56,6 +59,7 @@ const Routes = () => {
         <Route path="/profile" component={Profile} />
         <Route path="/login" component={Login} />
         <Route path="/Signup" component={Signup} />
+        <Route path="/food/review/:foodId" component={FoodReview} />
         <Route path="/food/:foodId" component={FoodDetail} />
       </Switch>
     </NativeRouter>

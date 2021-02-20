@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { View, ScrollView, Text, Image, StyleSheet } from "react-native"
-import { useLocation, useParams } from "react-router-native"
+import { useParams } from "react-router-native"
 import { useSelector } from "react-redux"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
@@ -29,7 +29,12 @@ const FoodDetail = () => {
         </View>
         <View style={styles.foodMainContainer}>
           <Text style={styles.foodName}>{food.fullName}</Text>
-          <Text style={styles.foodStar}>⭐ {"0.0"}</Text>
+          <Text style={styles.foodStar}>
+            ⭐{" "}
+            {food.sumStar === 0
+              ? "0.0"
+              : (food.sumStar / food.review.length).toFixed(1)}
+          </Text>
           <Text style={styles.foodPrice}>{food.price}원</Text>
         </View>
         <View style={styles.foodSubContainer}>
@@ -39,7 +44,7 @@ const FoodDetail = () => {
           <Text style={styles.foodSubDesc}>리뷰 {food.review.length}</Text>
         </View>
 
-        <FoodReviewBt />
+        <FoodReviewBt foodId={food._id} />
         <FoodReview review={food.review} />
       </ScrollView>
     </LayoutGoBack>

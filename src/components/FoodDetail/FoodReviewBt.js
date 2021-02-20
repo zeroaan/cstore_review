@@ -4,19 +4,20 @@ import { useHistory } from "react-router-native"
 import { useSelector } from "react-redux"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
-const FoodReviewBt = () => {
+const FoodReviewBt = ({ foodId }) => {
   const history = useHistory()
   const { user } = useSelector((state) => state.user)
 
   const onPressReviewBt = () => {
     if (user) {
-      return
+      history.push(`/food/review/${foodId}`)
+      return true
     }
     Alert.alert("", "로그인 후 이용 가능합니다.", [
       { text: "취소", onPress: () => null },
       { text: "로그인", onPress: () => history.push("/login") },
     ])
-    return true
+    return false
   }
 
   return (

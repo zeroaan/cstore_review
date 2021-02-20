@@ -16,6 +16,8 @@ const LIKED_FOOD = gql`
       price
       image
       liked
+      sumStar
+      category
       review {
         _id
         userid

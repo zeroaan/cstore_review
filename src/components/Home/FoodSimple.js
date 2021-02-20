@@ -3,17 +3,14 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native"
 import { useHistory } from "react-router-native"
 
 const FoodSimple = ({ item }) => {
-  const { _id, image, name, review, liked, price } = item
+  const { _id, image, name, review, liked, price, sumStar } = item
 
   const history = useHistory()
-
-  const sumStar = useRef(0)
-  sumStar.current === 0 && review.map((v) => (sumStar.current += v.star))
 
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => history.push({ pathname: `/food/${_id}` })}
+      onPress={() => history.push(`/food/${_id}`)}
       activeOpacity={1}>
       <Image style={styles.itemImage} source={{ uri: `${image}` }} />
       <View style={styles.item}>
@@ -26,9 +23,7 @@ const FoodSimple = ({ item }) => {
           <View style={styles.itemDesc__rigth}>
             <Text style={styles.itemStar}>
               평점{" "}
-              {review.length === 0
-                ? "0.0"
-                : (sumStar.current / review.length).toFixed(1)}
+              {sumStar === 0 ? "0.0" : (sumStar / review.length).toFixed(1)}
             </Text>
             <Text style={styles.itemPrice}>{price}원</Text>
           </View>

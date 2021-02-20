@@ -3,6 +3,19 @@ import { View, Text, StyleSheet } from "react-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
 const FoodReview = ({ review }) => {
+  const dateCount = (n) => {
+    let count = 0
+    let current = new Date() - n
+    while (current >= 86400000) {
+      current -= 86400000
+      count++
+    }
+    if (count === 0) {
+      return "오늘"
+    }
+    return `${count}일전`
+  }
+
   return (
     <>
       <View style={styles.foodReviewContainer}>
@@ -17,7 +30,7 @@ const FoodReview = ({ review }) => {
               <Icon name="person-outline" color="rgb(0,175,175)" size={28} />
               <View style={styles.foodReviewTopMid}>
                 <Text style={styles.foodReviewUserName}>{v.username}</Text>
-                <Text style={styles.foodReviewDate}>{v.date}</Text>
+                <Text style={styles.foodReviewDate}>{dateCount(v.date)}</Text>
               </View>
               <Text style={styles.foodReviewStar}>⭐ {v.star}</Text>
             </View>
