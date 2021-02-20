@@ -27,7 +27,7 @@ const NavBottom = () => {
   const tabValue = [
     { tab: "home", iconName: "home", route: "/", text: "홈" },
     { tab: "search", iconName: "search", route: "/search", text: "검색" },
-    { tab: "foodlist", iconName: "apps", route: "/foodlist", text: "상품검색" },
+    { tab: "foodlist", iconName: "apps", route: "/foodlist", text: "상품정보" },
     { tab: "profile", iconName: "person", route: "/profile", text: "내정보" },
   ]
 
