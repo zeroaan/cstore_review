@@ -1,5 +1,5 @@
 import React from "react"
-import { View, StyleSheet, TouchableOpacity } from "react-native"
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
 const FoodReviewStar = ({ star, setStar }) => {
@@ -20,6 +20,14 @@ const FoodReviewStar = ({ star, setStar }) => {
         onPress={() => setStar(rate)}
       />
     )
+  }
+  const StarText = (rate) => {
+    if (rate === 0) return `별점을 선택하세요`
+    else if (rate <= 1) return `${rate}점 (별로에요)`
+    else if (rate <= 2) return `${rate}점 (그저그래요)`
+    else if (rate <= 3) return `${rate}점 (괜찮아요)`
+    else if (rate <= 4) return `${rate}점 (좋아요)`
+    else return `${rate}점 (최고예요)`
   }
 
   return (
@@ -44,13 +52,16 @@ const FoodReviewStar = ({ star, setStar }) => {
           <TouchStar rate={4.5} />
           <TouchStar rate={5} />
         </View>
+        <Text style={styles.starText}>{StarText(star)}</Text>
       </View>
     </>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    alignItems: "center",
+  },
   starContainer: {
     flexDirection: "row",
     width: 200,
@@ -65,6 +76,11 @@ const styles = StyleSheet.create({
   touchStar: {
     width: 20,
     height: 40,
+  },
+  starText: {
+    marginTop: 8,
+    fontSize: 14,
+    color: "rgb(100,100,100)",
   },
 })
 

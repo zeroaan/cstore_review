@@ -63,7 +63,7 @@ const AddReview = () => {
   const { user } = useSelector((state) => state.user)
 
   const [inputPost, setInputPost] = useState("")
-  const [inputStar, setInputStar] = useState(4)
+  const [inputStar, setInputStar] = useState(0)
 
   const [reviewFood, { data }] = useMutation(REVIEW_FOOD, {
     variables: {
@@ -83,6 +83,9 @@ const AddReview = () => {
   const onPressReviewBt = () => {
     if (!inputPost) {
       ToastAndroid.show("리뷰를 입력해주세요", ToastAndroid.SHORT)
+      return false
+    } else if (inputStar === 0) {
+      ToastAndroid.show("별점을 선택하세요", ToastAndroid.SHORT)
       return false
     }
     if (user) {
