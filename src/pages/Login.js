@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef } from "react"
 import {
   View,
   Text,
@@ -9,7 +9,7 @@ import {
 } from "react-native"
 import { useHistory } from "react-router-native"
 import { useDispatch } from "react-redux"
-import { gql, useLazyQuery } from "@apollo/client"
+import { gql, useMutation } from "@apollo/client"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
 import { login } from "~/store/actions/user"
@@ -17,7 +17,7 @@ import { login } from "~/store/actions/user"
 import LayoutGoBack from "~/components/LayoutGoBack"
 
 const LOGIN = gql`
-  query login($email: String!, $password: String!) {
+  mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       _id
       username
@@ -35,23 +35,20 @@ const Login = () => {
   const [inputPassword, setInputPassword] = useState("")
   const pwRef = useRef(null)
 
-  const [loginQuery, { data }] = useLazyQuery(LOGIN, {
+  const [loginMutation, { data }] = useMutation(LOGIN, {
     variables: { email: inputEmail, password: inputPassword },
   })
 
-  useEffect(() => {
-    loginQuery()
-  }, [inputPassword])
-
-  const onPressLoginBt = () => {
+  const onPressLoginBt = async () => {
+    await loginMutation()
     if (!inputEmail) {
       ToastAndroid.show("이메일을 입력해주세요.", ToastAndroid.SHORT)
     } else if (!inputPassword) {
       ToastAndroid.show("비밀번호를 입력해주세요.", ToastAndroid.SHORT)
     } else if (data && data.login) {
-      dispatch(login(data.login))
-      ToastAndroid.show("로그인 완료", ToastAndroid.SHORT)
+      await dispatch(login(data.login))
       history.push("/")
+      ToastAndroid.show("로그인 완료", ToastAndroid.SHORT)
     } else {
       ToastAndroid.show(
         "가입되지 않은 이메일이거나,\n잘못된 비밀번호입니다.",
