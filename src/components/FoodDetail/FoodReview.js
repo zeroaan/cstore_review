@@ -5,7 +5,9 @@ import Icon from "react-native-vector-icons/MaterialIcons"
 const FoodReview = ({ review }) => {
   const dateCount = (n) => {
     let count = 0
-    let current = new Date() - n
+    const today = new Date()
+    let current =
+      new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1) - n
     while (current >= 86400000) {
       current -= 86400000
       count++
