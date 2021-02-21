@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import {
   View,
   Text,
@@ -39,14 +39,16 @@ const Login = () => {
     variables: { email: inputEmail, password: inputPassword },
   })
 
-  const onPressLoginBt = async () => {
-    await loginMutation()
+  useEffect(() => {
+    data && dispatch(login(data?.login)) && loginCheck()
+  }, [data])
+
+  const loginCheck = () => {
     if (!inputEmail) {
       ToastAndroid.show("이메일을 입력해주세요.", ToastAndroid.SHORT)
     } else if (!inputPassword) {
       ToastAndroid.show("비밀번호를 입력해주세요.", ToastAndroid.SHORT)
     } else if (data && data.login) {
-      await dispatch(login(data.login))
       history.push("/")
       ToastAndroid.show("로그인 완료", ToastAndroid.SHORT)
     } else {
@@ -56,6 +58,10 @@ const Login = () => {
       )
       setInputPassword("")
     }
+  }
+
+  const onPressLoginBt = async () => {
+    await loginMutation()
   }
 
   return (
