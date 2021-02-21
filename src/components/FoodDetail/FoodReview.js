@@ -24,7 +24,7 @@ const FoodReview = ({ review }) => {
         ) : (
           <Text style={styles.foodReviewText}>리뷰 ({review.length})</Text>
         )}
-        {review.map((v) => (
+        {[...review].reverse().map((v) => (
           <View key={v._id} style={styles.foodReview}>
             <View style={styles.foodReviewTop}>
               <Icon name="person-outline" color="rgb(0,175,175)" size={28} />
