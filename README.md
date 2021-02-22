@@ -119,6 +119,8 @@ export default foodReducer
 - 상단에는 어플명과 공지 또는 이벤트를 swiper를 통해 보여준다.
 - Best 상품, 좋아요 많은 상품, 리뷰 많은 상품을 순서대로 볼 수 있다.
 
+![home](https://user-images.githubusercontent.com/48481448/108710856-f0f31880-7557-11eb-98f5-6499d4f9c7d5.gif)
+
 ```jsx
 const bestLikedFoods = () => {
   return (
@@ -168,6 +170,8 @@ return (
 - 해당 음식을 클릭 후 보여지는 화면으로 상세 정보와 리뷰가 보여진다.
 - 좋아요, 리뷰 쓰기를 할 수 있다.
 
+![fooddetail](https://user-images.githubusercontent.com/48481448/108710877-f8b2bd00-7557-11eb-9ac0-33304986704f.gif)
+
 ```js
 import { useDispatch, useSelector } from "react-redux"
 import { gql, useMutation } from "@apollo/client"
@@ -212,6 +216,8 @@ useEffect(() => {
 - 리뷰 내용을 입력하고 별점을 선택한다. 별을 클릭하여 원하는 점수를 줄 수 있다.
 - 리뷰 작성 시 useMutaion hooks를 통해 리뷰 내용을 MongoDB에 반영하고 redux 에도 바로 저장한다.
 
+![foodreview](https://user-images.githubusercontent.com/48481448/108710880-f9e3ea00-7557-11eb-9955-4e05ca49a74c.gif)
+
 ```js
 import { useDispatch, useSelector } from "react-redux"
 import { gql, useMutation } from "@apollo/client"
@@ -240,6 +246,8 @@ useEffect(() => {
 - 회원가입 시 apollo/client의 useMutaion hooks를 통해 입력한 유저 정보를 MongoDB에 반영한다.
 - 이메일, 닉네임 중복확인을 통해 유저 정보 중복을 방지한다.
 
+![signup](https://user-images.githubusercontent.com/48481448/108710887-fc464400-7557-11eb-9af3-142134767453.gif)
+
 ```js
 import { gql, useQuery, useMutation } from "@apollo/client"
 
@@ -266,6 +274,8 @@ const SIGN_UP = gql`
 
 - 로그인 시 입력한 정보를 useMutation을 통해 해당 유저가 있는지 확인한다.
 - 확인 후 있으면 dispatch를 통해 유저 정보를 저장한다.
+
+![login](https://user-images.githubusercontent.com/48481448/108710893-fea89e00-7557-11eb-89d0-94f84b6c5f5c.gif)
 
 ```js
 import { useDispatch } from "react-redux"
@@ -319,6 +329,8 @@ const onPressLoginBt = async () => {
 ### Logout
 
 - 로그아웃 시 dispatch를 통해 유저 정보를 지워준다.
+
+![logout](https://user-images.githubusercontent.com/48481448/108710902-00726180-7558-11eb-817a-17ee61151251.gif)
 
 ```js
 import * as types from "../actions/types"
