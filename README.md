@@ -2,7 +2,7 @@
 
 - 기간 : 2021년 2월 1일 ~ 진행중
 - React-Native로 만든 앱으로 편의점 음식들에 대한 리뷰, 평점을 등록할 수 있고 가장 높은 평점이나 좋아요를 받은 음식들을 순위 별로 볼 수 있도록 만들었습니다. 리뷰, 평점은 로그인 한 사용자만 등록이 가능합니다. 유저, 음식 데이터는 GraphQL과 Apollo를 통해 MongoDB에 저장했으며, React에서는 Apollo-client를 이용하여 데이터를 가져와 보여주었습니다.
-- Server : github.com/zeroaan/cstore_server
+- Server : [github.com/zeroaan/cstore_server](github.com/zeroaan/cstore_server)
 
 <br />
 
