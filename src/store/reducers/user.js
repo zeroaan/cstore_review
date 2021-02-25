@@ -6,7 +6,7 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.LOGIN: {
+    case types.UPDATE_USER: {
       return { ...state, user: action.data }
     }
     case types.LOGOUT: {

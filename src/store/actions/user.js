@@ -1,8 +1,8 @@
 import * as types from "./types"
 
-export const login = (data) => {
+export const updateUser = (data) => {
   return {
-    type: types.LOGIN,
+    type: types.UPDATE_USER,
     data,
   }
 }

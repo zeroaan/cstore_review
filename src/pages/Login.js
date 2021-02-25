@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux"
 import { gql, useMutation } from "@apollo/client"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
-import { login } from "~/store/actions/user"
+import { updateUser } from "~/store/actions/user"
 
 import LayoutGoBack from "~/components/LayoutGoBack"
 
@@ -40,7 +40,7 @@ const Login = () => {
   })
 
   useEffect(() => {
-    data && dispatch(login(data?.login)) && loginCheck()
+    data && dispatch(updateUser(data?.login)) && loginCheck()
   }, [data])
 
   const loginCheck = () => {

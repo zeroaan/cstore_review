@@ -29,23 +29,39 @@ const LIKED_FOOD = gql`
     }
   }
 `
+const LIKED_USER = gql`
+  mutation updateUserLiked($_id: ID!, $myliked: String!) {
+    updateUserLiked(_id: $_id, myliked: $myliked) {
+      _id
+      username
+      email
+      myliked
+      myreview
+    }
+  }
+`
 
 const FoodDetailTop = ({ food }) => {
   const history = useHistory()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.user)
 
-  const [likedFood, { data }] = useMutation(LIKED_FOOD, {
+  const [likedFood, { data: foodData }] = useMutation(LIKED_FOOD, {
     variables: { _id: food._id, liked: user?._id },
+  })
+  const [likedUser, { data: userData }] = useMutation(LIKED_USER, {
+    variables: { _id: user?._id, myliked: food._id },
   })
 
   useEffect(() => {
-    data && dispatch(addFood(data.updateFoodLiked))
-  }, [data])
+    foodData && dispatch(addFood(foodData.updateFoodLiked))
+    userData && dispatch(updateUser(userData.updateUserLiked))
+  }, [foodData, userData])
 
   const onPressLikeBt = () => {
     if (user) {
       likedFood()
+      likedUser()
       return true
     }
     Alert.alert("", "로그인 후 이용 가능합니다.", [
