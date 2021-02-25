@@ -14,6 +14,7 @@ import { gql, useMutation } from "@apollo/client"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
 import { addFood } from "~/store/actions/food"
+import { updateUser } from "~/store/actions/user"
 
 import LayoutGoBack from "~/components/LayoutGoBack"
 import AddReviewStar from "~/components/AddReview/AddReviewStar"
@@ -54,6 +55,17 @@ const REVIEW_FOOD = gql`
     }
   }
 `
+const REVIEW_USER = gql`
+  mutation updateUserReview($_id: ID!, $myreivew: String!) {
+    updateUserReview(_id: $_id, myreivew: $myreivew) {
+      _id
+      username
+      email
+      myliked
+      myreview
+    }
+  }
+`
 
 const AddReview = () => {
   const { foodId } = useParams()
@@ -61,11 +73,11 @@ const AddReview = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.user)
-
+  console.log(user)
   const [inputPost, setInputPost] = useState("")
   const [inputStar, setInputStar] = useState(0)
 
-  const [reviewFood, { data }] = useMutation(REVIEW_FOOD, {
+  const [reviewFood, { data: foodData }] = useMutation(REVIEW_FOOD, {
     variables: {
       _id: foodId,
       userid: user?._id,
@@ -75,10 +87,14 @@ const AddReview = () => {
       star: inputStar,
     },
   })
+  const [reviewUser, { data: userData }] = useMutation(REVIEW_USER, {
+    variables: { _id: user?._id, myreview: foodId },
+  })
 
   useEffect(() => {
-    data && dispatch(addFood(data.updateFoodReview))
-  }, [data])
+    foodData && dispatch(addFood(foodData.updateFoodReview))
+    userData && dispatch(updateUser(userData.updateUserReview))
+  }, [foodData, userData])
 
   const onPressReviewBt = () => {
     if (!inputPost) {
@@ -95,6 +111,7 @@ const AddReview = () => {
           text: "확인",
           onPress: async () => {
             await reviewFood()
+            await reviewUser()
             history.goBack()
           },
         },
