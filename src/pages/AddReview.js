@@ -56,8 +56,8 @@ const REVIEW_FOOD = gql`
   }
 `
 const REVIEW_USER = gql`
-  mutation updateUserReview($_id: ID!, $myreivew: String!) {
-    updateUserReview(_id: $_id, myreivew: $myreivew) {
+  mutation updateUserReview($_id: ID!, $myreview: String!) {
+    updateUserReview(_id: $_id, myreview: $myreview) {
       _id
       username
       email
@@ -73,7 +73,7 @@ const AddReview = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.user)
-  console.log(user)
+
   const [inputPost, setInputPost] = useState("")
   const [inputStar, setInputStar] = useState(0)
 
