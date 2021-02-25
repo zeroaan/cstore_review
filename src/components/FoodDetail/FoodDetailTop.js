@@ -6,6 +6,7 @@ import { gql, useMutation } from "@apollo/client"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
 import { addFood } from "~/store/actions/food"
+import { updateUser } from "~/store/actions/user"
 
 const LIKED_FOOD = gql`
   mutation updateFoodLiked($_id: ID!, $liked: String!) {
