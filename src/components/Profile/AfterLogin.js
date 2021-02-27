@@ -1,11 +1,13 @@
 import React from "react"
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native"
+import { useHistory } from "react-router-native"
 import { useDispatch, useSelector } from "react-redux"
 import Icon from "react-native-vector-icons/MaterialIcons"
 
 import { logout } from "~/store/actions/user"
 
 const AfterLogin = () => {
+  const history = useHistory()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.user)
 
@@ -39,7 +41,7 @@ const AfterLogin = () => {
         <TouchableOpacity
           style={styles.menuBt}
           activeOpacity={0.7}
-          onPress={() => null}>
+          onPress={() => history.push("/changename")}>
           <Text style={styles.menuText}>닉네임 변경</Text>
         </TouchableOpacity>
         <TouchableOpacity
