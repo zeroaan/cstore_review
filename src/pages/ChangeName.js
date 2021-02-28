@@ -8,7 +8,6 @@ import {
   ToastAndroid,
   Alert,
 } from "react-native"
-import Icon from "react-native-vector-icons/MaterialIcons"
 import { useHistory } from "react-router-native"
 import { useDispatch, useSelector } from "react-redux"
 import { gql, useMutation } from "@apollo/client"
@@ -16,6 +15,7 @@ import { gql, useMutation } from "@apollo/client"
 import { updateUser } from "~/store/actions/user"
 
 import LayoutGoBack from "~/components/LayoutGoBack"
+import TopBack from "~/components/TopBack"
 
 const CHANGE_NAME = gql`
   mutation changeUsername($_id: ID!, $username: String!) {
@@ -65,14 +65,7 @@ const ChangeName = () => {
   return (
     <LayoutGoBack>
       <View style={styles.container}>
-        <Icon
-          style={styles.closeIcon}
-          name="close"
-          color="rgb(0,0,0)"
-          size={25}
-          onPress={() => history.goBack()}
-        />
-        <Text style={styles.topText}>닉네임 변경</Text>
+        <TopBack title="닉네임 변경" />
 
         <View style={styles.textInputContainer}>
           <TextInput
@@ -109,25 +102,13 @@ const ChangeName = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    padding: 18,
     backgroundColor: "rgb(255,255,255)",
-  },
-  closeIcon: {
-    position: "absolute",
-    top: 16,
-    left: 14,
-  },
-  topText: {
-    fontSize: 18,
-    fontWeight: "bold",
   },
 
   textInputContainer: {
     flexDirection: "row",
-    marginTop: 30,
-    marginBottom: 15,
+    paddingVertical: 8,
+    paddingHorizontal: 18,
   },
   nameInput: {
     flex: 1,
@@ -140,7 +121,7 @@ const styles = StyleSheet.create({
 
   buttonContainer: {
     flexDirection: "row",
-    marginTop: 15,
+    padding: 18,
   },
   cancelBt: {
     flex: 1,
