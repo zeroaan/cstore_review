@@ -22,7 +22,7 @@ const Search = () => {
 
   const onSubmitSearch = () => {
     const foods = []
-    starFoods.map((v) => v.fullName.includes(inputText) && foods.push(v))
+    starFoods.map((v) => v.name.includes(inputText) && foods.push(v))
     foods.length === 0 ? setNoFoods(true) : setNoFoods(false)
     setSearchFoods(foods)
   }
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 16,
+    paddingBottom: 12,
   },
   searchInput: {
     flex: 1,
