@@ -13,9 +13,9 @@ const Home = () => {
   )
 
   const FoodData = [
-    { id: 0, title: "Best 상품", data: [...starFoods].slice(0, 10) },
-    { id: 1, title: "좋아요 많은 상품", data: [...likedFoods].slice(0, 10) },
-    { id: 2, title: "리뷰 많은 상품", data: [...reviewFoods].slice(0, 10) },
+    { id: 0, title: "Best 상품", data: starFoods },
+    { id: 1, title: "좋아요 많은 상품", data: likedFoods },
+    { id: 2, title: "리뷰 많은 상품", data: reviewFoods },
   ]
 
   if (!foods) {
@@ -33,7 +33,7 @@ const Home = () => {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 style={styles.bestFood}>
-                {fData.data?.map((v) => (
+                {fData.data?.slice(0, 10).map((v) => (
                   <FoodSimple key={v._id} item={v} />
                 ))}
               </ScrollView>
