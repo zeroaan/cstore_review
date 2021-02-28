@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   topText: {
     fontSize: 18,
     fontWeight: "bold",
-    marginVertical: 20,
+    marginVertical: 18,
     textAlign: "center",
   },
 })
