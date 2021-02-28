@@ -4,7 +4,7 @@ import {
   ScrollView,
   Text,
   StyleSheet,
-  TouchableOpacity,
+  ToastAndroid,
   TextInput,
 } from "react-native"
 import { useSelector } from "react-redux"
@@ -21,6 +21,10 @@ const Search = () => {
   const [noFoods, setNoFoods] = useState(false)
 
   const onSubmitSearch = () => {
+    if (!inputText) {
+      ToastAndroid.show("검색어를 입력해주세요", ToastAndroid.SHORT)
+      return
+    }
     const foods = []
     starFoods.map((v) => v.name.includes(inputText) && foods.push(v))
     foods.length === 0 ? setNoFoods(true) : setNoFoods(false)
