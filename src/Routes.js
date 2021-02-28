@@ -15,6 +15,8 @@ import AddReview from "~/pages/AddReview"
 import Login from "~/pages/Login"
 import Signup from "~/pages/Signup"
 import ChangeName from "~/pages/ChangeName"
+import MyLiked from "~/pages/MyLiked"
+import MyReview from "~/pages/MyReview"
 
 const GET_FOODS = gql`
   query {
@@ -63,6 +65,8 @@ const Routes = () => {
         <Route path="/food/review/:foodId" component={AddReview} />
         <Route path="/food/:foodId" component={FoodDetail} />
         <Route path="/changename" component={ChangeName} />
+        <Route path="/myliked" component={MyLiked} />
+        <Route path="/myreview" component={MyReview} />
       </Switch>
     </NativeRouter>
   )

@@ -47,13 +47,13 @@ const AfterLogin = () => {
         <TouchableOpacity
           style={styles.menuBt}
           activeOpacity={0.7}
-          onPress={() => null}>
+          onPress={() => history.push("/myliked")}>
           <Text style={styles.menuText}>My 좋아요 상품</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.menuBt}
           activeOpacity={0.7}
-          onPress={() => null}>
+          onPress={() => history.push("/myreview")}>
           <Text style={styles.menuText}>My 리뷰 상품</Text>
         </TouchableOpacity>
       </View>
