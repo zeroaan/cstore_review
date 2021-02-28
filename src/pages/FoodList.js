@@ -13,7 +13,7 @@ import Layout from "~/components/Layout"
 import Food from "~/components/Food"
 
 const TouchableOpacityStyled = styled(TouchableOpacity)`
-  padding: 8px 10px;
+  padding: 8px 16px;
   border-bottom-width: ${(props) => (props.$select ? "2px" : "0px")};
   border-color: "rgb(0, 175, 175)";
 `
@@ -31,7 +31,7 @@ const FoodList = () => {
 
   useEffect(() => {
     let foods
-    const category = ["라면", "김밥", "과자", "음료"]
+    const category = ["라면", "과자", "음료"]
 
     if (catState === "ALL") {
       setCatFoods(starFoods)
@@ -63,7 +63,6 @@ const FoodList = () => {
         <View style={styles.categoryList}>
           <SelectCategory v="ALL" />
           <SelectCategory v="라면" />
-          <SelectCategory v="김밥" />
           <SelectCategory v="과자" />
           <SelectCategory v="음료" />
           <SelectCategory v="기타" />
