@@ -1,5 +1,5 @@
 import React from "react"
-import { View, ScrollView, StyleSheet } from "react-native"
+import { View, Text, ScrollView, StyleSheet } from "react-native"
 import { useSelector } from "react-redux"
 
 import LayoutGoBack from "~/components/LayoutGoBack"
@@ -15,6 +15,9 @@ const MyReview = () => {
       <View style={styles.container}>
         <TopBack title="My 리뷰 상품" />
 
+        {user.myreview.length === 0 && (
+          <Text style={styles.noReview}>작성한 리뷰가 없습니다.</Text>
+        )}
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.likedContainer}>
             {foods.map(
@@ -36,10 +39,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "rgb(255,255,255)",
   },
+
+  noReview: {
+    textAlign: "center",
+    marginTop: 12,
+    fontSize: 14,
+  },
   likedContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
+    marginBottom: 20,
   },
 })
 

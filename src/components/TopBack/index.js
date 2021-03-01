@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 16,
     left: 14,
+    zIndex: 1,
   },
   topText: {
     fontSize: 18,

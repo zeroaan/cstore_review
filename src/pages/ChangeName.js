@@ -34,7 +34,7 @@ const ChangeName = () => {
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.user)
 
-  const [inputName, setInputName] = useState("")
+  const [inputName, setInputName] = useState(user.username)
 
   const [changeName, { data }] = useMutation(CHANGE_NAME, {
     variables: { _id: user?._id, username: inputName },
@@ -56,6 +56,7 @@ const ChangeName = () => {
         onPress: async () => {
           await changeName()
           history.goBack()
+          ToastAndroid.show("닉네임 변경 완료", ToastAndroid.SHORT)
         },
       },
     ])
