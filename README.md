@@ -6,7 +6,7 @@
 
 <br />
 
-![screen](https://user-images.githubusercontent.com/48481448/108707259-19c4df00-7553-11eb-9e15-9ea85912d9c1.png)
+![screen](https://user-images.githubusercontent.com/48481448/110238648-3535de00-7f86-11eb-8095-c900119a4437.png)
 
 <br />
 
@@ -117,9 +117,9 @@ export default foodReducer
 ### Home
 
 - 상단에는 어플명과 공지 또는 이벤트를 swiper를 통해 보여준다.
-- Best 상품, 좋아요 많은 상품, 리뷰 많은 상품을 순서대로 볼 수 있다.
+- Best 상품, 좋아요, 리뷰 많은 상위 10개의 상품들을 순서대로 볼 수 있다.
 
-![home](https://user-images.githubusercontent.com/48481448/108711521-d4a3ab80-7558-11eb-9e8a-bfdec3663159.gif)
+![home](https://user-images.githubusercontent.com/48481448/110239148-ea699580-7f88-11eb-9d56-3ff7f8d77f8b.gif)
 
 ```jsx
 const bestLikedFoods = () => {
@@ -170,7 +170,7 @@ return (
 - 해당 음식을 클릭 후 보여지는 화면으로 상세 정보와 리뷰가 보여진다.
 - 좋아요, 리뷰 쓰기를 할 수 있다.
 
-![fooddetail](https://user-images.githubusercontent.com/48481448/108711569-e38a5e00-7558-11eb-88a9-efdae4ebfb72.gif)
+![fooddetail](https://user-images.githubusercontent.com/48481448/110239149-ec335900-7f88-11eb-8b5f-56feaa7a69a1.gif)
 
 ```js
 import { useDispatch, useSelector } from "react-redux"
@@ -359,10 +359,137 @@ export default userReducer
 
 ### Search
 
-- 진행중...
+- 입력한 검색어에 포함하는 편의점 음식들이 나열된다. 클릭 시 해당 음식 정보로 이동
+
+![search](https://user-images.githubusercontent.com/48481448/110239153-edfd1c80-7f88-11eb-93d1-04add50decb4.gif)
+
+```jsx
+const Search = () => {
+  const { starFoods } = useSelector((state) => state.food)
+
+  const [inputText, setInputText] = useState("")
+  const [searchFoods, setSearchFoods] = useState([])
+  const [noFoods, setNoFoods] = useState(false)
+
+  const onSubmitSearch = () => {
+    if (!inputText) {
+      ToastAndroid.show("검색어를 입력해주세요", ToastAndroid.SHORT)
+      return
+    }
+    const foods = []
+    starFoods.map((v) => v.name.includes(inputText) && foods.push(v))
+    foods.length === 0 ? setNoFoods(true) : setNoFoods(false)
+    setSearchFoods(foods)
+  }
+
+  return (
+    <Layout>
+      <View style={styles.container}>
+        <Text style={styles.topText}>검색</Text>
+        <View style={styles.searchContainer}>
+          <TextInput
+            style={styles.searchInput}
+            value={inputText}
+            onChangeText={(v) => setInputText(v)}
+            placeholder="검색어를 입력해주세요"
+            autoCapitalize="none"
+            returnKeyType="search"
+            maxLength={30}
+            autoFocus
+            onSubmitEditing={onSubmitSearch}
+          />
+          <Icon
+            style={styles.searchIcon}
+            name="search"
+            color="rgb(0,175,175)"
+            size={24}
+            onPress={onSubmitSearch}
+          />
+        </View>
+
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.foodContainer}>
+            {searchFoods.map((v) => (
+              <Food key={v._id} item={v} />
+            ))}
+            {searchFoods.length % 2 === 1 && (
+              <View style={{ width: "40%", margin: 8 }} />
+            )}
+          </View>
+          {noFoods && <Text style={styles.noFood}>검색 결과가 없습니다.</Text>}
+        </ScrollView>
+      </View>
+    </Layout>
+  )
+}
+```
 
 <br />
 
 ### Food List
 
-- 진행중...
+- 전체 음식을 보여주며, 카테고리를 선택해 해당 카테고리 음식만 볼 수 있다. 클릭 시 해당 음식 정보로 이동
+
+![foodlist](https://user-images.githubusercontent.com/48481448/110239154-ef2e4980-7f88-11eb-8c45-e98659874e23.gif)
+
+```jsx
+const FoodList = () => {
+  const { starFoods } = useSelector((state) => state.food)
+
+  const [catState, setCatState] = useState("ALL")
+  const [catFoods, setCatFoods] = useState(starFoods)
+
+  useEffect(() => {
+    let foods
+    const category = ["라면", "과자", "음료"]
+
+    if (catState === "ALL") {
+      setCatFoods(starFoods)
+      return
+    } else if (catState === "기타") {
+      foods = starFoods.filter((v) => !category.includes(v.category))
+    } else {
+      foods = starFoods.filter((v) => v.category === catState)
+    }
+    setCatFoods(foods)
+  }, [catState])
+
+  const SelectCategory = ({ v }) => {
+    return (
+      <TouchableOpacityStyled
+        activeOpacity={0.7}
+        onPress={() => setCatState(v)}
+        $select={v === catState}>
+        <TextCategory $select={v === catState}>{v}</TextCategory>
+      </TouchableOpacityStyled>
+    )
+  }
+
+  return (
+    <Layout>
+      <View style={styles.container}>
+        <Text style={styles.topText}>모든 상품</Text>
+
+        <View style={styles.categoryList}>
+          <SelectCategory v="ALL" />
+          <SelectCategory v="라면" />
+          <SelectCategory v="과자" />
+          <SelectCategory v="음료" />
+          <SelectCategory v="기타" />
+        </View>
+
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.foodContainer}>
+            {catFoods.map((v) => (
+              <Food key={v._id} item={v} />
+            ))}
+            {catFoods.length % 2 === 1 && (
+              <View style={{ width: "40%", margin: 8 }} />
+            )}
+          </View>
+        </ScrollView>
+      </View>
+    </Layout>
+  )
+}
+```
